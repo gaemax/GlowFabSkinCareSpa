@@ -7,6 +7,8 @@ if(!isset($_SESSION['admin'])){
 }
 
 $page = isset($_GET['page']) ? $_GET['page'] : "dashboard";
+
+
 ?>
 
 <!DOCTYPE html>
@@ -90,9 +92,9 @@ if(isset($_GET['action']) && isset($_GET['id'])){
 }
 
 $q = $conn->query("
-SELECT bookings.*, users.name
+SELECT bookings.*, clients.name
 FROM bookings
-JOIN users ON bookings.user_email = users.email
+JOIN clients ON bookings.user_email = clients.email
 ORDER BY date DESC
 ");
 ?>
@@ -119,11 +121,17 @@ ORDER BY date DESC
 </tr>
 
 <?php while($row=$q->fetch_assoc()){ ?>
+
+<?php
+$myDate = new DateTime($row['date']);
+$myDate = $myDate->format('M d, Y');
+?>
+
 <tr>
 <td><?= $row['id'] ?></td>
-<td><?= htmlspecialchars($row['name']) ?></td>
+<td><?= htmlspecialchars($row['name']) ?></td> <!--$row['name'] -->
 <td><?= htmlspecialchars($row['service']) ?></td>
-<td><?= $row['date'] ?></td>
+<td><?= $myDate ?></td>
 <td><?= $row['time'] ?></td>
 <td><?= isset($row['status']) ? $row['status'] : 'Pending' ?></td>
 <td>
