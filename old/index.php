@@ -345,13 +345,70 @@ if($conn->connect_error){
                         </li>
                     </ul>
                     
-                    <form action="#" class="contact-form">
+                    
+
+                    <form id="contactForm" class="contact-form">
                         <h3>SEND US A MESSAGE FOR HOME SERVICE</h3>
-                        <input type="text" placeholder="Your Name" class="form-input">
-                        <input type="email" placeholder="Your Email" class="form-input">
-                        <textarea placeholder="Your Message" class="form-input" required></textarea>
-                        <button class="button submit-button">Submit</button>
+                        <input type="text" name="name" placeholder="Your Name" class="form-input" required>
+                        <input type="email" name="email" placeholder="Your Email" class="form-input" required>
+                        <textarea name="message" placeholder="Your Message" class="form-input" required></textarea>
+                        <button type="submit" class="button submit-button">Submit</button>
+                        <p id="formResponse" style="color:green;"></p>
                     </form>
+                    
+                    <?php
+                    // 1. Handle form submission via POST
+                    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+                        if (!$conn) {
+                            echo "Connection failed: " . mysqli_connect_error();
+                            exit;
+                        }
+
+                        // Get POST data safely
+                        $name = mysqli_real_escape_string($conn, $_POST['name']);
+                        $email = mysqli_real_escape_string($conn, $_POST['email']);
+                        $message = mysqli_real_escape_string($conn, $_POST['message']);
+
+                        $sql = "INSERT INTO messages (name, email, message) VALUES ('$name', '$email', '$message')";
+
+                        if (mysqli_query($conn, $sql)) {
+                            echo "Message sent successfully!";
+                        } else {
+                            echo "Error: " . mysqli_error($conn);
+                        }
+
+                        mysqli_close($conn);
+                        exit; // Important: stop further HTML output for AJAX
+                    }
+                    ?>
+
+                    <script>
+                    // 2. AJAX submission
+                    const form = document.getElementById('contactForm');
+                    const responseEl = document.getElementById('formResponse');
+
+                    form.addEventListener('submit', function(e) {
+                        e.preventDefault(); // Prevent page reload
+
+                        const formData = new FormData(form);
+
+                        fetch('', {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(res => res.text())
+                        .then(data => {
+                            // responseEl.textContent = data;
+                            // form.reset();
+                        })
+                        .catch(err => {
+                            // responseEl.textContent = 'Error sending message.';
+                            // console.error(err);
+                        });
+                    });
+                    
+                    </script>
 
                 </div>
         </section>
