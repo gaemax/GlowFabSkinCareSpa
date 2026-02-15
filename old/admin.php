@@ -7,6 +7,8 @@ if(!isset($_SESSION['admin'])){
 }
 
 $page = isset($_GET['page']) ? $_GET['page'] : "dashboard";
+
+
 ?>
 
 <!DOCTYPE html>
@@ -90,9 +92,9 @@ if(isset($_GET['action']) && isset($_GET['id'])){
 }
 
 $q = $conn->query("
-SELECT bookings.*, users.name
+SELECT bookings.*, clients.name
 FROM bookings
-JOIN users ON bookings.user_email = users.email
+JOIN clients ON bookings.user_email = clients.email
 ORDER BY date DESC
 ");
 ?>
@@ -119,11 +121,17 @@ ORDER BY date DESC
 </tr>
 
 <?php while($row=$q->fetch_assoc()){ ?>
+
+<?php
+$myDate = new DateTime($row['date']);
+$myDate = $myDate->format('M d, Y');
+?>
+
 <tr>
 <td><?= $row['id'] ?></td>
-<td><?= htmlspecialchars($row['name']) ?></td>
+<td><?= htmlspecialchars($row['name']) ?></td> <!--$row['name'] -->
 <td><?= htmlspecialchars($row['service']) ?></td>
-<td><?= $row['date'] ?></td>
+<td><?= $myDate ?></td>
 <td><?= $row['time'] ?></td>
 <td><?= isset($row['status']) ? $row['status'] : 'Pending' ?></td>
 <td>
@@ -141,11 +149,8 @@ ORDER BY date DESC
 
 /* ================= CLIENTS ================= */
 elseif($page=="clients"){
-$q = $conn->query("
-SELECT bookings.*, clients.name
-FROM bookings
-JOIN clients ON bookings.user_email = clients.email
-ORDER BY date DESC
+$users = $conn->query("
+SELECT * FROM clients;
 ");
 ?>
 <div class="card">
@@ -155,15 +160,15 @@ ORDER BY date DESC
 <th>ID</th>
 <th>Name</th>
 <th>Email</th>
-<th>Phone</th>
+<!-- <th>Phone</th> -->
 </tr>
 
-<?php while($u=$users->fetch_assoc()){ ?>
+<?php while($u = $users->fetch_assoc()){ ?>
 <tr>
 <td><?= $u['id'] ?></td>
 <td><?= htmlspecialchars($u['name']) ?></td>
 <td><?= htmlspecialchars($u['email']) ?></td>
-<td><?= htmlspecialchars($u['phone']) ?></td>
+<!-- <td><?= htmlspecialchars($u['phone']) ?></td> -->
 </tr>
 <?php } ?>
 </table>
@@ -193,35 +198,10 @@ if(isset($_POST['add'])){
 
 /* ================= REPORTS ================= */
 elseif($page=="reports"){
-$bookings = $conn->query("
-SELECT bookings.*, clients.name, clients.email
-FROM bookings
-JOIN clients ON bookings.client_email = clients.email
-ORDER BY date DESC
-");
 ?>
 <div class="card">
 <h2>Reports</h2>
-<table>
-<tr>
-<th>ID</th>
-<th>Client</th>
-<th>Service</th>
-<th>Date</th>
-<th>Time</th>
-<th>Status</th>
-</tr>
-<?php while($b=$bookings->fetch_assoc()){ ?>
-<tr>
-<td><?= $b['id'] ?></td>
-<td><?= htmlspecialchars($b['name']) ?></td>
-<td><?= htmlspecialchars($b['service']) ?></td>
-<td><?= $b['date'] ?></td>
-<td><?= $b['time'] ?></td>
-<td><?= isset($b['status']) ? $b['status'] : 'Pending' ?></td>
-</tr>
-<?php } ?>
-</table>
+
 </div>
 <?php
 }
@@ -234,7 +214,7 @@ $year = date('Y');
 $appointments = $conn->query("
 SELECT bookings.*, clients.name
 FROM bookings
-JOIN clients ON bookings.client_email = clients.email
+JOIN clients ON bookings.user_email = clients.email
 WHERE MONTH(date) = $month AND YEAR(date) = $year
 ORDER BY date ASC, time ASC
 ");
