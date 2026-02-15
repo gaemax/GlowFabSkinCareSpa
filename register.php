@@ -4,7 +4,7 @@ include "db.php"; // make sure db.php connects to gfspa_db
 
 $msg = "";
 
-if(isset($_POST['register'])){
+if(isset($_POST['tblregister'])){
     $name = trim($_POST['name']);
     $email = trim($_POST['email']);
     $password = $_POST['password'];
