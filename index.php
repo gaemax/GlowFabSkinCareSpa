@@ -1,18 +1,25 @@
-<?php
+<html>
 
-    echo '<!DOCTYPE html>';
-    echo '<html>';
+    <head>
+        <title>GLOWFABSKINCARESPA</title>
 
-    echo '<head>';
-    echo '<title>Glow Fab</title>';
-    echo '</head>';
+        <link rel="stylesheet" href="style.css">
 
-    echo '<body>';
+    </head>
+    <body>
+        
+    <div class="header" width="">
+        <h1>Glow Fab</h1>
+        <ul>
+            <li>Home</li>
+            <li>About</li>
+            <li>Services</li>
+            <li>Staff</li>
+            <li>Reviews</li>
+            <li>Contact Us</li>
+        </ul>
+    </div>
 
-    echo '<h1>Hello World</h1>';
+    </body>
+</html>
 
-    echo '</body>';
-
-    echo '</html>';
-
-?>
