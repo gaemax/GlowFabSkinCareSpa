@@ -11,10 +11,36 @@ $user_email = $_SESSION['client']['email'];
 
 // Temporary services
 $services = [
-    ['name'=>'Facial','price'=>500],
-    ['name'=>'Massage','price'=>700],
-    ['name'=>'Manicure','price'=>300]
+    [
+        'name' => 'Facial',
+        'price' => 500,
+        'subservices' => [
+            ['name'=>'Facial 1','price'=>500],
+            ['name'=>'Facial 2','price'=>700],
+            ['name'=>'Facial 3','price'=>300]
+        ]
+    ],
+    [
+        'name' => 'Massage',
+        'price' => 700,
+        'subservices' => [
+            ['name'=>'Massage 1','price'=>500],
+            ['name'=>'Massage 2','price'=>700],
+            ['name'=>'Massage 3','price'=>300]
+        ]
+    ],
+    [
+        'name' => 'Manicure',
+        'price' => 300,
+        'subservices' => [
+            ['name'=>'Manicure 1','price'=>500],
+            ['name'=>'Manicure 2','price'=>700],
+            ['name'=>'Manicure 3','price'=>300]
+        ]
+    ]
 ];
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -47,9 +73,17 @@ th { background:#ff4da6; color:white; }
     <label>Service</label>
     <select name="service" id="service" required>
         <option value="">Select Service</option>
-        <?php foreach($services as $s): ?>
-            <option value="<?= $s['name'] ?>"><?= $s['name'] ?> - ₱<?= $s['price'] ?></option>
+        <?php foreach($services as $index => $s): ?>
+            <option value="<?= $index ?>">
+                <?= $s['name'] ?> - ₱<?= $s['price'] ?>
+            </option>
         <?php endforeach; ?>
+    </select>
+
+    <!-- subservices. it uses javascript to automatically populate the subservice list -->
+    <label>Sub-Service</label>
+    <select name="subservice" id="subservice" required>
+        <option value="">Select Sub-Service</option>
     </select>
 
     <label>Date</label>
@@ -60,6 +94,33 @@ th { background:#ff4da6; color:white; }
 
     <button type="submit">Book Appointment</button>
 </form>
+
+<script>
+    const services = <?= json_encode($services); ?>;
+
+    const serviceSelect = document.getElementById("service");
+    const subserviceSelect = document.getElementById("subservice");
+
+    serviceSelect.addEventListener("change", function () {
+
+    const selectedIndex = this.value;
+
+    subserviceSelect.innerHTML = '<option value="">Select Sub-Service</option>';
+
+    if (selectedIndex === "") return;
+
+    const selectedService = services[selectedIndex];
+
+    selectedService.subservices.forEach(sub => {
+        const option = document.createElement("option");
+        option.value = sub.name;
+        option.textContent = `${sub.name} - ₱${sub.price}`;
+        subserviceSelect.appendChild(option);
+    });
+
+});
+</script>
+
 
 <div class="calendar">
 <h3>Availability Calendar (Current Month)</h3>
