@@ -50,6 +50,7 @@ form button:hover{ background:#e60073; }
   <a href="?page=clients">Clients</a>
   <a href="?page=reports">Reports</a>
   <a href="?page=calendar">Calendar</a>
+  <a href="?page=messages">Messages</a>
   <div style="position:absolute; bottom:20px; width:100%;">
       <a href="admin_logout.php" style="background:#e60073; text-align:center;">Logout</a>
   </div>
@@ -248,8 +249,45 @@ for($d=1;$d<=31;$d++){
 </div>
 <?php
 }
+
+/* ================= MESSAGES ================= */
+elseif($page=="messages"){
+
+$m = $conn->query("
+SELECT * FROM messages;
+");
 ?>
 
+<div class="card">
+<h2>Messages</h2>
+<div class="search">
+<form method="GET">
+<input type="hidden" name="page" value="messages">
+<input type="text" name="search" placeholder="Search message..." value="<?= htmlspecialchars($search) ?>">
+<button>Search</button>
+</form>
+</div>
+
+<table>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Email</th>
+<th>Message</th>
+</tr>
+
+<?php while($message=$m->fetch_assoc()){ ?>
+
+<tr>
+<td><?= $message['id'] ?></td>
+<td><?= htmlspecialchars($message['name']) ?></td>
+<td><?= htmlspecialchars($message['email']) ?></td>
+<td><?= htmlspecialchars($message['message']) ?></td>
+</tr>
+<?php } ?>
+</table>
+</div>
+<?php } ?>
 </div> <!-- end main -->
 </body>
 </html>
