@@ -1,10 +1,9 @@
-<html>
 
+
+<html>
     <head>
         <title>GLOWFABSKINCARESPA</title>
-
         <link rel="stylesheet" href="style.css">
-
     </head>
     <body>
         
@@ -19,7 +18,5 @@
             <li>Contact Us</li>
         </ul>
     </div>
-
     </body>
 </html>
-
