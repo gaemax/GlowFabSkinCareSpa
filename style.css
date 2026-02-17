@@ -1,13 +1,13 @@
-
 * {
     box-sizing:border-box;
-
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
 
 body {
     margin: 0;
     padding: 0;
-    box-sizing:border-box;
+    box-sizing: border-box;
     font-family: "Poppins", sans-serif;
 }
 
@@ -19,50 +19,37 @@ body {
     --secondary-color:#ebc176;
     --light-pink-color:#f7e8ec;
     --medium-gray-color:#ccc;
-
-    /*FONT SIZE*/
-    --font-size-s:0.9rem;
-    --font-size-n:1rem;
-    --font-size-m:1.12rem;
-    --font-size-l:1.5rem;
-    --font-size-xl:2rem;
-    --font-size-xxl:2.3rem;
-
-    /*FONT WEIGHT*/
-    --font-weight-normal:400;
-    --font-weight-medium:500;
-    --font-weight-semibold:600;
-    --font-weight-bold:700;
-
-    /*BORDER RADIUS*/
-    --border-radius-s:8px;
-    --border-radius-m:30px;
-    --border-radius-circle:50%;
-
-    /*SITE MAX WIDTH*/
-    --site-max-width:1300px;
 }
 
-.header{
-    position:fixed;
-    width:100%;
-    z-index:5;
-    background:var(--primary-color);
-    color: white;
-    display:flex;   
+.navigatorBar {
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 64px;
+    padding: 0 10vw;
+
+    background-color: var(--primary-color);
+    color: var(--white-color);
 }
 
-.header ul{
-    display:flex;
+.navigatorBar h1 {
+    font-size: 2rem;
+}
+
+.navigatorBar ul {
+    display: flex;
     list-style: none;
-    margin: 0;
-    padding: 0; 
+
+    font-size: 1.25rem;
 }
 
-.header li{
-    margin: 0;
-    padding: 0 50;
+.navigatorBar ul li {
+    padding: 0.25rem 1.25rem;
+    transition: background-color 400ms;
+    border-radius: 2rem;
+    cursor: pointer;
+}
+
+.navigatorBar ul li:hover {
+    background-color: var(--secondary-color);
+    color: var(--dark-color);
 }
