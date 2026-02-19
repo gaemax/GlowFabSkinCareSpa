@@ -1,67 +1,301 @@
-
-*
-{
-    box-sizing:border-box;
-
-}
-body {
-    margin: 0;
-    padding: 0;
+* {
     box-sizing:border-box;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
 
 :root{
     /*COLORS*/
     --white-color:#fff;
     --dark-color:#252525;
-    --primary-color:#4e4648;
-    --secondary-color:#fcf8f1;
+    --primary-color:#3b141c;
+    --secondary-color:#ebc176;
     --light-pink-color:#f7e8ec;
     --medium-gray-color:#ccc;
-
-    /*FONT SIZE*/
-    --font-size-s:0.9rem;
-    --font-size-n:1rem;
-    --font-size-m:1.12rem;
-    --font-size-l:1.5rem;
-    --font-size-xl:2rem;
-    --font-size-xxl:2.3rem;
-
-    /*FONT WEIGHT*/
-    --font-weight-normal:400;
-    --font-weight-medium:500;
-    --font-weight-semibold:600;
-    --font-weight-bold:700;
-
-    /*BORDER RADIUS*/
-    --border-radius-s:8px;
-    --border-radius-m:30px;
-    --border-radius-circle:50%;
-
-    /*SITE MAX WIDTH*/
-    --site-max-width:1300px;
 }
 
-.header{
-    position:fixed;
-    width:100%;
-    z-index:5;
-    background:var(--primary-color);
-    color: white;
-    display:flex;   
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.primaryButton {
+    background-color: var(--secondary-color);
+    color: var(--dark-color);
+    padding: 1rem 2rem;
+    cursor: pointer;
+
+    border: 0;
+    border-radius: 2rem;
+
+    font-size: 1rem;
+
+    transition: all 300ms;
+}
+.primaryButton:hover {
+    scale: 1.1;
+}
+
+
+
+
+
+.navigatorBar {
+    position: sticky;
+    width: 100%;
+    left: 0;
+    top: 0;
+
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 64px;
+    padding: 0 7vw;
+
+    background-color: var(--primary-color);
+    color: var(--white-color);
 }
 
-.header ul{
-    display:flex;
+.navigatorBar h1 {
+    font-size: 2rem;
+}
+
+.navigatorBar ul {
+    display: flex;
     list-style: none;
-    margin: 0;
-    padding: 0; 
+
+    font-size: 1.25rem;
 }
 
-.header li{
+.navigatorBar ul li {
+    padding: 0.25rem 1.25rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    
+    transition: all 300ms;
+}
+
+.navigatorBar ul li:hover {
+    background-color: var(--secondary-color);
+    color: var(--dark-color);
+}
+
+
+
+
+
+.heroSection {
+    background-color: var(--light-pink-color);
+    min-height: 80vh;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 7vw;
+}
+
+.heroSection div {
+    width: 50%;
+}
+
+.heroSection h2 {
+    color: var(--secondary-color);
     margin: 0;
-    padding: 0 50;
+    margin-bottom: .25rem;
+
+    font-size: 2rem;
+}
+
+.heroSection h3 {
+    color: var(--dark-color);
+    margin: 0;
+
+    font-size: 2.25rem;
+    font-weight: 700;
+}
+
+
+
+
+
+.aboutUsSection {
+    background-color: var(--medium-gray-color);
+    min-height: 80vh;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 0 7vw;
+}
+
+.aboutUsSection div {
+    width: 50%;
+}
+
+
+
+
+
+.servicesSection {
+    background-color: var(--dark-color);
+    min-height: 80vh;
+
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    padding: 2rem 7vw;
+
+    color: var(--white-color);
+}
+
+.servicesSection h1 {
+    text-align: center;
+}
+
+.servicesSection .servicesContainer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.servicesSection .servicesContainer .serviceCard {
+    flex: 1 1 0;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+
+    /* border: 1px red solid; */
+}
+
+.servicesSection .servicesContainer .serviceCard * {
+    margin: 0;
+    margin-bottom: 0.5rem;
+}
+
+.servicesSection .servicesContainer .serviceCard img {
+    min-width: 300px;
+    min-height: 300px;
+
+    border: 1px white solid;
+}
+
+
+
+
+
+.staffSection {
+    background-color: var(--light-color);
+    min-height: 80vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 7vw;
+
+    color: var(--dark-color);
+}
+
+.staffSection .staffCarousel {
+    display: flex;
+    gap: 2rem;
+
+    width: 100%;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    /* scroll-marker-group: after; This doesnt work for some reason */
+    anchor-name: --staff-carousel;
+
+    padding-bottom: 2rem;
+}
+
+.staffSection .staffCarousel::scroll-marker-group {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem
+}
+
+.staffSection .staffCarousel::-webkit-scrollbar {
+    display: none;
+}
+
+.staffSection .staffCarousel::scroll-button(left) {
+    content: "◀";
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 2rem;
+    height: 3rem;
+    width: 3rem;
+
+    font-size: 1.25rem;
+    color: var(--white-color);
+    cursor: pointer;
+    
+    position: fixed;
+    position-anchor: --staff-carousel;
+    position-area: left center;
+}
+
+.staffSection .staffCarousel::scroll-button(right) {
+    content: "▶";
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 2rem;
+    height: 3rem;
+    width: 3rem;
+
+    font-size: 1.25rem;
+    color: var(--white-color);
+    cursor: pointer;
+
+    position: fixed;
+    position-anchor: --staff-carousel;
+    position-area: right center;
+}
+
+.staffSection .staffCarousel .staffCard {
+    flex: 0 0 300px;
+    text-align: center;
+
+    padding: 1rem;
+
+    scroll-snap-align: start;
+
+    /* border: 1px red solid; */
+}
+
+.staffSection .staffCarousel .staffCard::scroll-marker {
+    content: "";
+    height: 1rem;
+    width: 1rem;
+    background-color: var(--dark-color);
+    border-radius: 50%;
+}
+
+.staffSection .staffCarousel .staffCard img {
+    border: 1px var(--dark-color) solid;
+    min-width: 250px;
+    min-height: 300px;
+}
+
+
+
+
+
+
+.reviewsSection {
+    background-color: var(--medium-gray-color);
+    min-height: 80vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 7vw;
+
+    color: var(--dark-color);
 }
