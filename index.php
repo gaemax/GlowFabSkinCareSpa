@@ -244,7 +244,7 @@
         <h1>Reviews</h1>
         <div class="reviewContainer">
             <?php foreach ($reviews as $review): ?>
-                <img src="<?php htmlspecialchars($review) ?>" alt="<?php htmlspecialchars($review) ?>">
+                <img src="<?= htmlspecialchars($review) ?>" alt="<?= htmlspecialchars($review) ?>">
             <?php endforeach; ?>
         </div>
     </section>

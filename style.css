@@ -299,3 +299,14 @@ body {
 
     color: var(--dark-color);
 }
+
+.reviewsSection .reviewContainer {
+    display: flex;
+}
+
+.reviewContainer .reviewContainer img {
+    min-width: 30px;
+    min-height: 30px;
+
+    border: 1px black solid;
+}
