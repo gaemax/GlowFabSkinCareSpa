@@ -1,7 +1,7 @@
 <?php
     session_start();
-    if(isset($_SESSION["loggedin"])) {
-        header("location: login");
+    if(!isset($_SESSION["loggedin"])) {
+        header("location: login.php");
     }
 ?>
 
@@ -18,14 +18,17 @@
     <header>
         <div class="navigatorBar">
             <h1>Glow Fab</h1>
-            <ul>
-                <li><a href="#hero">Home</a></li>
-                <li><a href="#aboutUs">About Us</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#staff">Staff</a></li>
-                <li><a href="#reviews">Reviews</a></li>
-                <li><a href="#contactUs">Contact Us</a></li>
-            </ul>
+            <span>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#aboutUs">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#staff">Staff</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
+                    <li><a href="#contactUs">Contact Us</a></li>
+                    <li><a href="logout.php">Logout</a></li>
+                </ul>
+            </span>
         </div>
     </header>
 

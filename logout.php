@@ -26,6 +26,6 @@ header("Expires: 0");
 /* =========================
    REDIRECT AFTER LOGOUT
 ========================= */
-header("Location: login.php?logout=success");
+header("Location: login.php");
 exit;
 ?>
