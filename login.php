@@ -2,11 +2,6 @@
     require "db.php";
     session_start();
 
-    if(isset($_SESSION["loggedin"])) {
-        header("Location: index.php");
-        exit();
-    }
-
     $errorMessage = "";
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -31,8 +26,13 @@
             }
 
         } else {
-            $errorMessage = "User not found";
+            $errorMessage = "Email or Password is wrong";
         }
+    }
+
+    if(isset($_SESSION["loggedin"])) {
+        header("Location: index.php");
+        exit();
     }
 
 ?>
@@ -61,6 +61,7 @@
                     <input type="password" name="password" placeholder="Your Password" required>
                     <input type="submit">
                 </form>
+                <p class="errorMessage"><?= htmlspecialchars($errorMessage) ?></p>
                 <a href="register.php" class="loginLink">Don't have an account? Make one now!</a>
         </div>
         </section>
