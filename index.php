@@ -18,17 +18,17 @@
         <div class="navigatorBar" width="">
             <h1>Glow Fab</h1>
             <ul>
-                <li>Home</li>
-                <li>About</li>
-                <li>Services</li>
-                <li>Staff</li>
-                <li>Reviews</li>
-                <li>Contact Us</li>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#aboutUs">About Us</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#staff">Staff</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#contactUs">Contact Us</a></li>
             </ul>
         </div>
     </header>
 
-    <section class="heroSection">
+    <section id="hero" class="heroSection">
         <div>
             <h2>Glow fab Skin Care Spa</h2>
             <h3>GLOW YOU DAY WITH GLOW FAB SKIN CARE SPA</h3>
@@ -36,7 +36,7 @@
         </div>
     </section>
 
-    <section class="aboutUsSection">
+    <section id="aboutUs" class="aboutUsSection">
         <div>
             <h1>About Us!</h1>
             <p>Glow Fab Skin Care Spa is your go-to place for relaxation, beauty, and confidence. We offer quality skin care and beauty treatments designed to enhance your natural glow, using safe products and professional techniques. At Glow Fab, we believe that everyone deserves to feel beautiful, refreshed, and confident.</p>
@@ -150,7 +150,7 @@
         ];
     ?>
 
-    <section class="servicesSection">
+    <section id="services" class="servicesSection">
         <h1 class="header-text">Our Services</h1>
         <div class="servicesContainer">
             <?php foreach ($services as $service): ?>
@@ -218,7 +218,7 @@
         ];
     ?>
 
-    <section class="staffSection">
+    <section id="staff" class="staffSection">
         <h1 class="header-text">Our Staff</h1>
         <div class="staffCarousel">
             <?php foreach ($staffs as $staff): ?>
@@ -280,7 +280,7 @@
         ];
     ?>
     
-    <section class="reviewsSection">
+    <section id="reviews" class="reviewsSection">
         <h1 class="header-text">Reviews</h1>
         <div class="reviewContainer">
             <?php foreach ($reviews as $review): ?>
@@ -294,7 +294,7 @@
 
 
 
-    <section class="contactSection">
+    <section id="contactUs" class="contactSection">
         <h1 class="header-text">Contact Us</h1>
         <div class="contactContainer">
             <div class="contactInfo">
