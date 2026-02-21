@@ -7,8 +7,8 @@
 
 <html>
     <head>
-        <title>Glow Fab</title>
-        <link rel="stylesheet" href="style.css">
+        <title>Home - Glow Fab</title>
+        <link rel="stylesheet" href="styles/index.css">
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     </head>
@@ -235,57 +235,46 @@
         $reviews = [
             [
                 "name" => "John Doe",
-                "email" => "johndoe@email.com",
                 "reviewMessage" => "The service is very good!"
             ],
             [
                 "name" => "John Doe",
-                "email" => "johndoe@email.com",
                 "reviewMessage" => "The service is very good!"
             ],
             [
                 "name" => "John Doe",
-                "email" => "johndoe@email.com",
                 "reviewMessage" => "The service is very good!"
             ],
             [
                 "name" => "John Doe",
-                "email" => "johndoe@email.com",
                 "reviewMessage" => "The service is very good!"
             ],
             [
                 "name" => "John Doe",
-                "email" => "johndoe@email.com",
                 "reviewMessage" => "The service is very good!"
             ],
             [
                 "name" => "John Doe",
-                "email" => "johndoe@email.com",
                 "reviewMessage" => "The service is very good!"
             ],
             [
                 "name" => "John Doe",
-                "email" => "johndoe@email.com",
                 "reviewMessage" => "The service is very good!"
             ],
             [
                 "name" => "John Doe",
-                "email" => "johndoe@email.com",
                 "reviewMessage" => "The service is very good!"
             ],
             [
                 "name" => "John Doe",
-                "email" => "johndoe@email.com",
                 "reviewMessage" => "The service is very good!"
             ],
             [
                 "name" => "John Doe",
-                "email" => "johndoe@email.com",
                 "reviewMessage" => "The service is very good!"
             ],
             [
                 "name" => "John Doe",
-                "email" => "johndoe@email.com",
                 "reviewMessage" => "The service is very good!"
             ]
         ];
@@ -297,7 +286,7 @@
             <?php foreach ($reviews as $review): ?>
                 <div class="reviewCard">
                     <p class="reviewMessage"><?= htmlspecialchars($review["reviewMessage"]) ?></p>
-                    <p class="reviewSender"><?= htmlspecialchars($review["name"]) ?> <b><?= htmlspecialchars($review["email"]) ?></b></p>
+                    <p class="reviewSender"><b><?= htmlspecialchars($review["name"]) ?></b></p>
                 </div>
             <?php endforeach; ?>
         </div>
