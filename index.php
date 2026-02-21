@@ -10,6 +10,7 @@
         <title>Glow Fab</title>
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     </head>
     <body>
         
@@ -150,7 +151,7 @@
     ?>
 
     <section class="servicesSection">
-        <h1>Our Services</h1>
+        <h1 class="header-text">Our Services</h1>
         <div class="servicesContainer">
             <?php foreach ($services as $service): ?>
                 <div class="serviceCard">
@@ -218,7 +219,7 @@
     ?>
 
     <section class="staffSection">
-        <h1>Our Staff</h1>
+        <h1 class="header-text">Our Staff</h1>
         <div class="staffCarousel">
             <?php foreach ($staffs as $staff): ?>
                 <div class="staffCard">
@@ -291,7 +292,7 @@
     ?>
     
     <section class="reviewsSection">
-        <h1>Reviews</h1>
+        <h1 class="header-text">Reviews</h1>
         <div class="reviewContainer">
             <?php foreach ($reviews as $review): ?>
                 <div class="reviewCard">
@@ -300,7 +301,47 @@
                 </div>
             <?php endforeach; ?>
         </div>
+    </section>
 
+
+
+    <section class="contactSection">
+        <h1 class="header-text">Contact Us</h1>
+        <div class="contactContainer">
+            <div class="contactInfo">
+                <ul>
+                    <li class="contact-info">
+                        <i class="fa-solid fa-location-crosshairs"></i>
+                        <p>#137 SAN VICENTE STREET BARANGAY NUEVA SAN PEDRO LAGUNA</p>
+                    </li>
+                    <li class="contact-info">
+                        <i class="fa-regular fa-envelope"></i>
+                        <p>inna_jayne@yahhoo.com</p>
+                    </li>
+                    <li class="contact-info">
+                        <i class="fa-solid fa-phone"></i>
+                        <p>0995-382-6157 / 0928-604-3023</p>
+                    </li>
+                    <li class="contact-info">
+                        <i class="fa-regular fa-clock"></i>
+                        <p>MONDAY - SUNDAY: 10:00 AM - 8:00 PM</p>
+                    </li>
+                    <li class="contact-info">
+                        <i class="fa-solid fa-globe"></i>
+                        <p>glowfabskincarespa.com.ph</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="contactForm">
+                <form action="" class="contactCard">
+                    <label>Send us a Message for Home Service</label>
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" required></textarea>
+                    <input type="submit">
+                </form>
+            </div>
+        </div>
     </section>
 
     </body>
