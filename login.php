@@ -63,7 +63,7 @@
                 </form>
                 <p class="errorMessage"><?= htmlspecialchars($errorMessage) ?></p>
                 <a href="register.php" class="loginLink">Don't have an account? Make one now!</a>
-        </div>
+            </div>
         </section>
     </body>
 </html>
