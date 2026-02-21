@@ -265,8 +265,6 @@ body {
     padding: 1rem;
 
     scroll-snap-align: start;
-
-    /* border: 1px red solid; */
 }
 
 .staffSection .staffCarousel .staffCard::scroll-marker {
@@ -282,8 +280,7 @@ body {
     min-width: 250px;
     min-height: 300px;
 }
-
-
+    
 
 
 
@@ -302,11 +299,27 @@ body {
 
 .reviewsSection .reviewContainer {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
 }
 
-.reviewContainer .reviewContainer img {
-    min-width: 30px;
-    min-height: 30px;
+.reviewsSection .reviewContainer .reviewCard {
+    flex: 0 0 400px;
 
-    border: 1px black solid;
+    background-color: var(--white-color);
+
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.reviewsSection .reviewContainer .reviewCard .reviewMessage {
+    font-style: italic;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.reviewsSection .reviewContainer .reviewCard .reviewSender {
+    font-size: 0.75rem;
+    margin: 0;
 }

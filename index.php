@@ -232,21 +232,75 @@
 
     <?php
         $reviews = [
-            "images/review1.jpg",
-            "images/review2.jpg",
-            "images/review3.jpg",
-            "images/review4.jpg",
-            "images/review5.jpg"
+            [
+                "name" => "John Doe",
+                "email" => "johndoe@email.com",
+                "reviewMessage" => "The service is very good!"
+            ],
+            [
+                "name" => "John Doe",
+                "email" => "johndoe@email.com",
+                "reviewMessage" => "The service is very good!"
+            ],
+            [
+                "name" => "John Doe",
+                "email" => "johndoe@email.com",
+                "reviewMessage" => "The service is very good!"
+            ],
+            [
+                "name" => "John Doe",
+                "email" => "johndoe@email.com",
+                "reviewMessage" => "The service is very good!"
+            ],
+            [
+                "name" => "John Doe",
+                "email" => "johndoe@email.com",
+                "reviewMessage" => "The service is very good!"
+            ],
+            [
+                "name" => "John Doe",
+                "email" => "johndoe@email.com",
+                "reviewMessage" => "The service is very good!"
+            ],
+            [
+                "name" => "John Doe",
+                "email" => "johndoe@email.com",
+                "reviewMessage" => "The service is very good!"
+            ],
+            [
+                "name" => "John Doe",
+                "email" => "johndoe@email.com",
+                "reviewMessage" => "The service is very good!"
+            ],
+            [
+                "name" => "John Doe",
+                "email" => "johndoe@email.com",
+                "reviewMessage" => "The service is very good!"
+            ],
+            [
+                "name" => "John Doe",
+                "email" => "johndoe@email.com",
+                "reviewMessage" => "The service is very good!"
+            ],
+            [
+                "name" => "John Doe",
+                "email" => "johndoe@email.com",
+                "reviewMessage" => "The service is very good!"
+            ]
         ];
     ?>
-
+    
     <section class="reviewsSection">
         <h1>Reviews</h1>
         <div class="reviewContainer">
             <?php foreach ($reviews as $review): ?>
-                <img src="<?= htmlspecialchars($review) ?>" alt="<?= htmlspecialchars($review) ?>">
+                <div class="reviewCard">
+                    <p class="reviewMessage"><?= htmlspecialchars($review["reviewMessage"]) ?></p>
+                    <p class="reviewSender"><?= htmlspecialchars($review["name"]) ?> <b><?= htmlspecialchars($review["email"]) ?></b></p>
+                </div>
             <?php endforeach; ?>
         </div>
+
     </section>
 
     </body>
