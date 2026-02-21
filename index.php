@@ -20,7 +20,7 @@
             <h1>Glow Fab</h1>
             <span>
                 <ul>
-                    <li><a href="#hero">Home</a></li>
+                    <!-- <li><a href="#hero">Home</a></li> -->
                     <li><a href="#aboutUs">About Us</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#staff">Staff</a></li>

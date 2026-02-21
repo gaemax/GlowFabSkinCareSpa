@@ -62,7 +62,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Login - Glow Fab</title>
+        <title>Register - Glow Fab</title>
         <link rel="stylesheet" href="styles/global.css">
         <link rel="stylesheet" href="styles/login.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
