@@ -8,6 +8,7 @@
 <html>
     <head>
         <title>Home - Glow Fab</title>
+        <link rel="stylesheet" href="styles/global.css">
         <link rel="stylesheet" href="styles/index.css">
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -15,7 +16,7 @@
     <body>
         
     <header>
-        <div class="navigatorBar" width="">
+        <div class="navigatorBar">
             <h1>Glow Fab</h1>
             <ul>
                 <li><a href="#hero">Home</a></li>
