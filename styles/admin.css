@@ -180,6 +180,7 @@ body {
     cursor: pointer;
     
     padding: 0.5rem 1rem;
+    border: none;
     border-radius: 0.75rem; 
 
     font-size: 0.75rem;
@@ -193,7 +194,7 @@ body {
 
 
 .deleteButton {
-    background-color: var(--dark-color);
+    background-color: #cc3b3b;
     color: var(--light-pink-color);
     padding: 0.5rem 1rem;
     cursor: pointer;
@@ -207,4 +208,21 @@ body {
 }
 .deleteButton:hover {
     scale: 1.1;
+}
+
+
+
+
+.calendarTable {
+    width: 100%;
+    margin-bottom: 3rem;
+}
+
+.calendarTable th,
+.calendarTable td {
+    text-align: left;
+}
+
+.calendarTable th {
+    background-color: var(--medium-gray-color);
 }
