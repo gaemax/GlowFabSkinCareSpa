@@ -265,48 +265,59 @@
     <?php
         $reviews = [
             [
-                "name" => "John Doe",
-                "reviewMessage" => "The service is very good!"
+                "name" => "John Doe1",
+                "reviewMessage" => "The service is very good!",
+                "imgSource" => "images/myimage.jpg"
             ],
             [
-                "name" => "John Doe",
-                "reviewMessage" => "The service is very good!"
+                "name" => "John Doe2",
+                "reviewMessage" => "The service is very good!",
+                "imgSource" => "images/myimage.jpg"
             ],
             [
-                "name" => "John Doe",
-                "reviewMessage" => "The service is very good!"
+                "name" => "John Doe3",
+                "reviewMessage" => "The service is very good!",
+                "imgSource" => "images/myimage.jpg"
             ],
             [
-                "name" => "John Doe",
-                "reviewMessage" => "The service is very good!"
+                "name" => "John Doe4",
+                "reviewMessage" => "The service is very good!",
+                "imgSource" => "images/myimage.jpg"
             ],
             [
-                "name" => "John Doe",
-                "reviewMessage" => "The service is very good!"
+                "name" => "John Doe5",
+                "reviewMessage" => "The service is very good!",
+                "imgSource" => "images/myimage.jpg"
             ],
             [
-                "name" => "John Doe",
-                "reviewMessage" => "The service is very good!"
+                "name" => "John Doe6",
+                "reviewMessage" => "The service is very good!",
+                "imgSource" => "images/myimage.jpg"
             ],
             [
-                "name" => "John Doe",
-                "reviewMessage" => "The service is very good!"
+                "name" => "John Doe7",
+                "reviewMessage" => "The service is very good!",
+                "imgSource" => "images/myimage.jpg"
             ],
             [
-                "name" => "John Doe",
-                "reviewMessage" => "The service is very good!"
+                "name" => "John Doe8",
+                "reviewMessage" => "The service is very good!",
+                "imgSource" => "images/myimage.jpg"
             ],
             [
-                "name" => "John Doe",
-                "reviewMessage" => "The service is very good!"
+                "name" => "John Doe9",
+                "reviewMessage" => "The service is very good!",
+                "imgSource" => "images/myimage.jpg"
             ],
             [
-                "name" => "John Doe",
-                "reviewMessage" => "The service is very good!"
+                "name" => "John Doe10",
+                "reviewMessage" => "The service is very good!",
+                "imgSource" => "images/myimage.jpg"
             ],
             [
-                "name" => "John Doe",
-                "reviewMessage" => "The service is very good!"
+                "name" => "John Doe11",
+                "reviewMessage" => "The service is very good!",
+                "imgSource" => "images/myimage.jpg"
             ]
         ];
     ?>
@@ -314,10 +325,11 @@
     <section id="reviews" class="reviewsSection">
         <h1 class="header-text">Reviews</h1>
         <div class="reviewContainer">
-            <?php foreach ($reviews as $review): ?>
+            <?php foreach ($reviews as $r): ?>
                 <div class="reviewCard">
-                    <p class="reviewMessage"><?= htmlspecialchars($review["reviewMessage"]) ?></p>
-                    <p class="reviewSender"><b><?= htmlspecialchars($review["name"]) ?></b></p>
+                    <!-- <img src="<?= htmlspecialchars($r["imgSource"]) ?>" alt="<?= htmlspecialchars($r["imgSource"]) ?>"> -->
+                    <p class="reviewMessage"><?= htmlspecialchars($r["reviewMessage"]) ?></p>
+                    <p class="reviewSender"><b><?= htmlspecialchars($r["name"]) ?></b></p>
                 </div>
             <?php endforeach; ?>
         </div>

@@ -35,7 +35,7 @@ CREATE TABLE status (
 
 INSERT INTO status (name) VALUES 
 ('Pending'),
-('Confirmed'),
+('Approved'),
 ('Completed'),
 ('Cancelled')
 ON DUPLICATE KEY UPDATE name = name;

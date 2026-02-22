@@ -31,8 +31,13 @@
     }
 
     if(isset($_SESSION["loggedin"])) {
-        header("Location: index.php");
-        exit();
+        if ($_SESSION["role"] === "client") {
+            header("Location: index.php");
+            exit();
+        } else if ($_SESSION["role"] === "staff" || $_SESSION["role"] === "admin") {
+            header("Location: admin.php");
+            exit();
+        }
     }
 
 ?>
