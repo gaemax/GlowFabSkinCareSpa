@@ -14,6 +14,7 @@
         $firstname = trim($_POST["firstname"]);
         $middlename = trim($_POST["middlename"]);
         $email = trim($_POST["email"]);
+        $contactNumber = trim($_POST["contactNumber"]);
         $password = trim($_POST["password"]);
         $confirmpassword = trim($_POST["confirmPassword"]);
 
@@ -35,20 +36,31 @@
             $errorMessage = "User already exists";
         }
 
+        try {
+            $check = intval($contactNumber);
+        } catch(Exception $e) {
+            $errorMessage = "Invalid contact number";
+        }
+
+        if (strlen($contactNumber) != 11) {
+            $errorMessage = "Invalid contact number";
+        }
+
         if ($errorMessage === "") {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
             $defaultRole = "client";
 
             $query = "INSERT INTO users 
-            (lastname, firstname, middlename, email, password, role)
-            VALUES (?, ?, ?, ?, ?, ?)";
+            (lastname, firstname, middlename, email, contact_number, password, role)
+            VALUES (?, ?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($query);
             $stmt->bind_param(
-                "ssssss",
+                "sssssss",
                 $lastname,
                 $firstname,
                 $middlename,
                 $email,
+                $contactNumber,
                 $hashedPassword,
                 $defaultRole
             );
@@ -79,12 +91,15 @@
             <div class="loginCard">
                 <h1>Register an Account</h1>
                 <form method="POST">
-                    <div class ="nameContainer">
+                    <div class="hContainer">
                         <input type="text" name="lastname" placeholder="Last Name" required>
                         <input type="text" name="firstname" placeholder="First name" required>
-                        <input type="text" name="middlename" placeholder="Middle Name" required>
+                        <input type="text" name="middlename" placeholder="Middle Name (Optional)">
                     </div>
-                    <input name="email" type="text" placeholder="Email" required>
+                    <div class="hContainer">
+                        <input name="email" type="text" placeholder="Email" required>
+                        <input name="contactNumber" type="text" placeholder="Contact Number (Optional)">
+                    </div>
                     <input name="password" type="password" placeholder="Password" required>
                     <input name="confirmPassword" type="password" placeholder="Confirm Password" required>
                     <input type="submit">

@@ -15,7 +15,8 @@ body {
 
     display: flex;
     flex-direction: column;
-    width: 40%;
+    /* min-width: 50%; */
+    min-width: 30%;
     border-radius: 1rem;
     filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
 
@@ -60,10 +61,17 @@ body {
 
 
 
-.nameContainer {
-    display: block;
+.hContainer {
+    display: flex;
+    width: 100%;
+    gap: 0.25rem;
+    box-sizing: border-box;
 }
 
+.hContainer * {
+    flex: 1 0 auto;
+    box-sizing: border-box;
+}
 
 
 

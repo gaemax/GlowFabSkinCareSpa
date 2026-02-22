@@ -15,15 +15,16 @@ CREATE TABLE users (
     firstname VARCHAR(100) NOT NULL,
     middlename VARCHAR(100),
     email VARCHAR(255) NOT NULL UNIQUE,
+    contact_number VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     role ENUM('client', 'staff', 'admin') NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
-INSERT INTO users (lastname, firstname, middlename, email, password, role)
+INSERT INTO users (lastname, firstname, middlename, email, contact_number, password, role)
 VALUES
-('Loslos', 'Gabriel', 'M', 'gabriel.loslos@gmail.com', '$2a$12$aBddAWylfI21Ia4WxtJ/ZeiT03hC4cOcymZ3j0IpRP40vFtdsqHcO', 'admin'),
-('Loslos', 'James', 'M', 'james.loslos@gmail.com', '$2a$12$aBddAWylfI21Ia4WxtJ/ZeiT03hC4cOcymZ3j0IpRP40vFtdsqHcO', 'client');
+('Loslos', 'Gabriel', 'M', 'gabriel.loslos@email.com', '00000000001', '$2a$12$aBddAWylfI21Ia4WxtJ/ZeiT03hC4cOcymZ3j0IpRP40vFtdsqHcO', 'admin'),
+('Loslos', 'James', 'M', 'james.loslos@email.com', '00000000002', '$2a$12$aBddAWylfI21Ia4WxtJ/ZeiT03hC4cOcymZ3j0IpRP40vFtdsqHcO', 'client');
 
 CREATE TABLE status (
     status_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
