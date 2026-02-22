@@ -164,6 +164,7 @@ body {
 
 .bookingCard form input[type="text"],
 .bookingCard form input[type="date"],
+.bookingCard form input[type="number"],
 .bookingCard form select {
     padding: 0.5rem 1rem;
 

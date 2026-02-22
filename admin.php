@@ -169,10 +169,9 @@
                 <h1>Services</h1>
                 <div class="bookingCard">
                     <form method="POST" action="addService.php">
-                        <label>Add New Service</label>
                         <input type="text" name="name" placeholder="Name">
                         <input type="text" name="desc" placeholder="Description">
-                        <input type="submit" value="Add Service">
+                        <input type="submit" value="Add/Edit Service">
                     </form>
                 </div>
                 <table>
@@ -188,7 +187,7 @@
                         <tr>
                             <td><?= htmlspecialchars($s["name"]) ?></td>
                             <td><?= htmlspecialchars($s["description"]) ?></td>
-                            <td><a href="deleteService.php?id=<?= $s["service_id"] ?>"><button class="deleteButton">Delete</button></a></td>
+                            <td><a href="deleteService.php?service_id=<?= $s["service_id"] ?>"><button class="deleteButton">Delete</button></a></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -199,12 +198,28 @@
         <div class="cardContainer">
             <div class="infoCard bookingTableCard">
                 <h1>Sub-Services</h1>
+                <div class="bookingCard">
+                    <form method="POST" action="addSubService.php">
+                        <input type="text" name="name" placeholder="Name">
+                        <select name="parentService">
+                            <option value="">Choose parent service</option>
+                            <?php foreach($serviceList as $s): ?>
+                                <option value="<?= htmlspecialchars($s["name"]) ?>"><?= htmlspecialchars($s["name"]) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <input type="text" name="desc" placeholder="Description">
+                        <input type="number" name="price" placeholder="Price">
+                        <input type="submit" value="Add/Edit Service">
+                    </form>
+                </div>
                 <table>
                     <thead>
                         <tr>
                             <th>Name</th>
                             <th>Parent Service</th>
                             <th>Description</th>
+                            <th>Price</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -213,6 +228,8 @@
                             <td><?= htmlspecialchars($s["name"]) ?></td>
                             <td><?= htmlspecialchars($s["service_name"]) ?></td>
                             <td><?= htmlspecialchars($s["description"]) ?></td>
+                            <td><?= htmlspecialchars($s["price"]) ?></td>
+                            <td><a href="deleteService.php?subservice_id=<?= $s["subservice_id"] ?>"><button class="deleteButton">Delete</button></a></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
