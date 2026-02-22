@@ -1,9 +1,11 @@
 <?php
     require "db.php";
     session_start();
-    if(!isset($_SESSION["loggedin"])) {
-        header("location: login.php");
-    }
+
+    $loggedIn = !empty($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true;
+    // if(!isset($_SESSION["loggedin"])) {
+    //     header("location: login.php");
+    // }
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $message = trim($_POST["message"]);
@@ -42,7 +44,11 @@
                     <li><a href="#staff">Staff</a></li>
                     <li><a href="#reviews">Reviews</a></li>
                     <li><a href="#contactUs">Contact Us</a></li>
-                    <li><a href="logout.php">Logout</a></li>
+                    <?php if($loggedIn): ?>
+                        <li><a href="logout.php">Logout</a></li>
+                    <?php else: ?>
+                        <li><a href="login.php">Login</a></li>
+                    <?php endif;?>
                 </ul>
             </span>
         </div>
@@ -52,10 +58,12 @@
         <div>
             <h2>Glow fab Skin Care Spa</h2>
             <h3>GLOW YOU DAY WITH GLOW FAB SKIN CARE SPA</h3>
-            <span>
-                <a href="booking.php"><button class="primaryButton">Book Now</button></a>
-                <a href="mybookings.php"><button class="secondaryButton">My Bookings</button></a>
-            </span>
+            <?php if($loggedIn): ?>
+                <span>
+                    <a href="booking.php"><button class="primaryButton">Book Now</button></a>
+                    <a href="mybookings.php"><button class="secondaryButton">My Bookings</button></a>
+                </span>
+            <?php endif;?>
         </div>
     </section>
 
@@ -350,7 +358,11 @@
                     <!-- <input type="text" name="name" placeholder="Your Name" required>
                     <input type="email" name="email" placeholder="Your Email" required> -->
                     <textarea name="message" placeholder="Your Message" required></textarea>
-                    <input type="submit">
+                    <?php if($loggedIn): ?>
+                        <input type="submit">
+                    <?php else: ?>
+                        <input type="submit" disabled value="Login First">
+                    <?php endif;?>  
                 </form>
             </div>
         </div>
