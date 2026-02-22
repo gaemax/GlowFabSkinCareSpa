@@ -4,12 +4,20 @@
 
     $loggedIn = !empty($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true;
 
+    if (isset($_GET['year'])) {
+        $calendayYear = $_GET['year'];
+    } else {
+       $calendayYear = 0;
+    }
+
+
     if (isset($_GET['page'])) {
         $page = $_GET['page'];
     } else {
-        die('Page not specified.');
+        $page ="dashboard";
     }
 
+    
     if (!$loggedIn) {
         header("Location: login.php");
         exit();
@@ -90,6 +98,22 @@
     $result = $stmt->fetch_all(MYSQLI_ASSOC);
 
     $allClients = $result;
+
+
+    $months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+    ];
 ?>
 
 <!DOCTYPE html>
@@ -111,7 +135,7 @@
             <li><a href="admin.php?page=appointments">Appointments</a></li>
             <li><a href="admin.php?page=clients">Clients</a></li>
             <li><a href="admin.php?page=reports">Reports</a></li>
-            <li><a href="admin.php?page=calendar">Calendar</a></li>
+            <li><a href="admin.php?page=calendar&year=2026">Calendar</a></li>
             <li><a href="admin.php?page=messages">Messages</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
@@ -318,6 +342,83 @@
                 </table>
             </div>
         </div>
+    <?php elseif ($page == "reports"): ?>
+        <h1>Reports</h1>
+    <?php elseif ($page == "calendar"): ?>
+        <h1>Calendar</h1>
+        <div class="cardContainer">
+            <div class="infoCard">
+                <div class="bookingCard">
+                    <h2><?= htmlspecialchars($calendayYear) ?></h2>
+                    <form action="chooseYear.php">
+                        <select name="chosenYear" id="">
+                            <option value="2026">2026</option>
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                            <option value="2020">2020</option>
+                        </select>
+                        <input type="submit">
+                    </form>
+                </div>
+                <div>
+                </div>
+                <?php foreach (range(1, 12) as $m): ?>
+                    <div>
+                        <h3><?= htmlspecialchars($months[$m-1]) ?></h3>
+                        <?php
+                            $date = date("Y-m-d");
+                            $query = "
+                                SELECT b.*, CONCAT(u.lastname, ' ',u.firstname, ' ',u.middlename) as user_name, s.name as status_name, sb.price as price
+                                FROM bookings b
+                                JOIN users u ON b.user_id = u.user_id
+                                JOIN status s ON b.status_id = s.status_id
+                                JOIN subservices sb ON b.subservice = sb.name
+                                WHERE YEAR(b.date) = ? AND MONTH(b.date) = ?";
+                            $stmt = $conn->prepare($query);
+                            $stmt->bind_param(
+                                "ss", 
+                                $calendayYear,
+                                $m
+                                );
+                            $stmt->execute();
+                            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+                            $monthlyFilter = $result;
+                        ?>
+                        <table class="calendarTable">
+                            <thead>
+                                <tr>
+                                    <th>Day</th>
+                                    <!-- <th>Timeslot</th> -->
+                                    <th>Client Name</th>
+                                    <th>Service</th>
+                                    <th>Subservice</th>
+                                    <th>Status</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($monthlyFilter as $mf): ?>
+                                    <tr>
+                                        <td><?= htmlspecialchars(date("j", strtotime($mf["date"]))) ?></td>
+                                        <!-- <td><?= htmlspecialchars(date("g:i a", strtotime($mf["start_time"]))) . " to " . date("g:i a", strtotime($mf["end_time"]))?></td> -->
+                                        <td><?= htmlspecialchars($mf["user_name"]) ?></td>
+                                        <td><?= htmlspecialchars($mf["service"]) ?></td>
+                                        <td><?= htmlspecialchars($mf["subservice"]) ?></td>
+                                        <td><?= htmlspecialchars($mf["status_name"]) ?></td>
+                                        <td>P <?= htmlspecialchars($mf["price"]) ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    <?php elseif ($page == "messages"): ?>
+        <h1>Messages</h1>
     <?php endif; ?>
 
 </body>

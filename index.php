@@ -2,6 +2,10 @@
     require "db.php";
     session_start();
 
+    if($_SESSION["role"] != "client") {
+        header("location: admin.php?page=dashboard");
+    }
+
     $loggedIn = !empty($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true;
     // if(!isset($_SESSION["loggedin"])) {
     //     header("location: login.php");
