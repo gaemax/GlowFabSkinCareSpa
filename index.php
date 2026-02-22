@@ -1,33 +1,11 @@
 <?php
-    require "db.php";
     session_start();
-
-    if($_SESSION["role"] != "client") {
-        header("location: admin.php?page=dashboard");
-    }
-
-    $loggedIn = !empty($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true;
-    // if(!isset($_SESSION["loggedin"])) {
-    //     header("location: login.php");
-    // }
-
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        $message = trim($_POST["message"]);
-
-        $query = "INSERT INTO messages 
-        (user_id, messageBody)
-        VALUES (?, ?)";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param(
-            "is",
-            $_SESSION["user_id"],
-            $message
-        );
-        $stmt->execute();
+    if(!isset($_SESSION["loggedin"])) {
+        header("location: login.php");
     }
 ?>
 
-<html>
+<html>  
     <head>
         <title>Home - Glow Fab</title>
         <link rel="stylesheet" href="styles/global.css">
@@ -48,11 +26,7 @@
                     <li><a href="#staff">Staff</a></li>
                     <li><a href="#reviews">Reviews</a></li>
                     <li><a href="#contactUs">Contact Us</a></li>
-                    <?php if($loggedIn): ?>
-                        <li><a href="logout.php">Logout</a></li>
-                    <?php else: ?>
-                        <li><a href="login.php">Login</a></li>
-                    <?php endif;?>
+                    <li><a href="logout.php">Logout</a></li>
                 </ul>
             </span>
         </div>
@@ -62,12 +36,7 @@
         <div>
             <h2>Glow fab Skin Care Spa</h2>
             <h3>GLOW YOU DAY WITH GLOW FAB SKIN CARE SPA</h3>
-            <?php if($loggedIn): ?>
-                <span>
-                    <a href="booking.php"><button class="primaryButton">Book Now</button></a>
-                    <a href="mybookings.php"><button class="secondaryButton">My Bookings</button></a>
-                </span>
-            <?php endif;?>
+            <a href="booking.php"><button class="primaryButton">Book Now</button></a>
         </div>
     </section>
 
@@ -269,59 +238,48 @@
     <?php
         $reviews = [
             [
-                "name" => "John Doe1",
-                "reviewMessage" => "The service is very good!",
-                "imgSource" => "images/myimage.jpg"
+                "name" => "John Doe",
+                "reviewMessage" => "The service is very good!"
             ],
             [
-                "name" => "John Doe2",
-                "reviewMessage" => "The service is very good!",
-                "imgSource" => "images/myimage.jpg"
+                "name" => "John Doe",
+                "reviewMessage" => "The service is very good!"
             ],
             [
-                "name" => "John Doe3",
-                "reviewMessage" => "The service is very good!",
-                "imgSource" => "images/myimage.jpg"
+                "name" => "John Doe",
+                "reviewMessage" => "The service is very good!"
             ],
             [
-                "name" => "John Doe4",
-                "reviewMessage" => "The service is very good!",
-                "imgSource" => "images/myimage.jpg"
+                "name" => "John Doe",
+                "reviewMessage" => "The service is very good!"
             ],
             [
-                "name" => "John Doe5",
-                "reviewMessage" => "The service is very good!",
-                "imgSource" => "images/myimage.jpg"
+                "name" => "John Doe",
+                "reviewMessage" => "The service is very good!"
             ],
             [
-                "name" => "John Doe6",
-                "reviewMessage" => "The service is very good!",
-                "imgSource" => "images/myimage.jpg"
+                "name" => "John Doe",
+                "reviewMessage" => "The service is very good!"
             ],
             [
-                "name" => "John Doe7",
-                "reviewMessage" => "The service is very good!",
-                "imgSource" => "images/myimage.jpg"
+                "name" => "John Doe",
+                "reviewMessage" => "The service is very good!"
             ],
             [
-                "name" => "John Doe8",
-                "reviewMessage" => "The service is very good!",
-                "imgSource" => "images/myimage.jpg"
+                "name" => "John Doe",
+                "reviewMessage" => "The service is very good!"
             ],
             [
-                "name" => "John Doe9",
-                "reviewMessage" => "The service is very good!",
-                "imgSource" => "images/myimage.jpg"
+                "name" => "John Doe",
+                "reviewMessage" => "The service is very good!"
             ],
             [
-                "name" => "John Doe10",
-                "reviewMessage" => "The service is very good!",
-                "imgSource" => "images/myimage.jpg"
+                "name" => "John Doe",
+                "reviewMessage" => "The service is very good!"
             ],
             [
-                "name" => "John Doe11",
-                "reviewMessage" => "The service is very good!",
-                "imgSource" => "images/myimage.jpg"
+                "name" => "John Doe",
+                "reviewMessage" => "The service is very good!"
             ]
         ];
     ?>
@@ -329,11 +287,10 @@
     <section id="reviews" class="reviewsSection">
         <h1 class="header-text">Reviews</h1>
         <div class="reviewContainer">
-            <?php foreach ($reviews as $r): ?>
+            <?php foreach ($reviews as $review): ?>
                 <div class="reviewCard">
-                    <!-- <img src="<?= htmlspecialchars($r["imgSource"]) ?>" alt="<?= htmlspecialchars($r["imgSource"]) ?>"> -->
-                    <p class="reviewMessage"><?= htmlspecialchars($r["reviewMessage"]) ?></p>
-                    <p class="reviewSender"><b><?= htmlspecialchars($r["name"]) ?></b></p>
+                    <p class="reviewMessage"><?= htmlspecialchars($review["reviewMessage"]) ?></p>
+                    <p class="reviewSender"><b><?= htmlspecialchars($review["name"]) ?></b></p>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -360,7 +317,7 @@
                     </li>
                     <li class="contact-info">
                         <i class="fa-regular fa-clock"></i>
-                        <p>MONDAY - SUNDAY: 10:00 AM - 8:00 PM</p>
+                        <p>MONDAY - SUNDAY: 11:00 AM - 9:00 PM</p>
                     </li>
                     <li class="contact-info">
                         <i class="fa-solid fa-globe"></i>
@@ -369,16 +326,12 @@
                 </ul>
             </div>
             <div class="contactForm">
-                <form method="POST" class="contactCard">
+                <form action="" class="contactCard">
                     <label>Send us a Message for Home Service</label>
-                    <!-- <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email" required> -->
-                    <textarea name="message" placeholder="Your Message" required></textarea>
-                    <?php if($loggedIn): ?>
-                        <input type="submit">
-                    <?php else: ?>
-                        <input type="submit" disabled value="Login First">
-                    <?php endif;?>  
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" required></textarea>
+                    <input type="submit">
                 </form>
             </div>
         </div>
