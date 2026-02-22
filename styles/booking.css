@@ -1,30 +1,32 @@
 @import url(global.css);
 
-
 body {
     background-color: var(--light-pink-color);
 }
 
-.loginSection {
+
+
+
+
+.bookingSection {
     display: flex;
     justify-content: center;
 }
 
-.loginCard {
+.bookingCard {
     background-color: var(--white-color);
 
     display: flex;
     flex-direction: column;
-    /* min-width: 50%; */
-    min-width: 30%;
+    min-width: 50%;
     border-radius: 1rem;
     filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
 
     padding: 0.5rem 3rem;
-    margin-top: 15vh;
+    margin-top: 5vh;
 }
 
-.loginCard form {
+.bookingCard form {
     display: flex;
     gap: 1rem;
     flex-direction: column;
@@ -32,8 +34,9 @@ body {
     width: 100%;
 }
 
-.loginCard form input[type="text"],
-.loginCard form input[type="password"] {
+.bookingCard form input[type="text"],
+.bookingCard form input[type="date"],
+.bookingCard form select {
     padding: 0.75rem 1rem;
 
     border: 1px solid #dcdcdc;
@@ -43,7 +46,23 @@ body {
     font-family: inherit;
 }
 
-.loginCard form input[type="submit"] {
+.bookingCard form select option {
+    padding: 0.75rem 1rem;
+
+    border: 1px solid #dcdcdc;
+    border-radius: 0.75rem;
+
+    width: 100%;
+
+    font-size: 0.75rem;
+    font-family: inherit;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.bookingCard form input[type="submit"] {
     background-color: var(--secondary-color);
     cursor: pointer;
 
@@ -71,36 +90,4 @@ body {
 .hContainer * {
     flex: 1 0 auto;
     box-sizing: border-box;
-}
-
-
-
-
-.loginLink {
-    text-decoration: none;
-    color: var(--primary-color);
-    text-align: center;
-
-    font-size: 1rem;
-
-    transition: all 300ms;
-}
-
-.loginLink:hover {
-    scale: 1.1;
-}
-
-
-
-
-
-.errorMessage {
-    font-size: 1rem;
-    color: rgb(228, 62, 62);
-
-    text-align: center;
-
-    padding: 0;
-    margin: 0;
-    margin-top: 1rem;
 }
