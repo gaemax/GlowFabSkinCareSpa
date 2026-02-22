@@ -74,7 +74,11 @@
     <header>
         <div class="navigatorBar">
             <h1>Glow Fab</h1>
+            <ul>
+                <li><a href="index.php">Home</a></li>
+            </ul>
         </div>
+        
     </header>
 
         <section class="bookingSection">
