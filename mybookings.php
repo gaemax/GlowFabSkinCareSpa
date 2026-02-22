@@ -7,7 +7,12 @@
         exit;
     }
 
-    $query = "SELECT * FROM bookings WHERE user_id = ?";
+    $query = "
+        SELECT b.*, s.name AS status_name
+        FROM bookings b
+        JOIN status s on b.status_id = s.status_id
+        WHERE user_id = ?
+    ";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("s", $_SESSION["user_id"]);
     $stmt->execute();
@@ -41,32 +46,27 @@
                             <th>Service</th>
                             <th>Sub-Service</th>
                             <th>Date</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                            <th>Status ID</th>
-                            <th>Created At</th>
+                            <th>Time Slot</th>
+                            <th>Status</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                            <?php foreach($myBookingList as $b): ?>
+                        <?php foreach($myBookingList as $b): ?>
                         <tr>
-                                <td><?= $b["user_id"] ?> ></td>
-                                <td><?= htmlspecialchars(intval($b["service"])) ?></td>
-                                <td><?= htmlspecialchars($b["subservice"]) ?></td>
-                                <td><?= htmlspecialchars($b["date"]) ?></td>
-                                <td><?= htmlspecialchars($b["start_time"]) ?></td>
-                                <td><?= htmlspecialchars($b["end_time"]) ?></td>
-                                <td><?= htmlspecialchars($b["status_id"]) ?></td>
-                                </tr>
-                            <?php endforeach; ?>
-                            <!-- <td>1</td>
-                            <td>Facial Treatment</td>
-                            <td>Deep Cleansing</td>
-                            <td>2026-03-15</td>
-                            <td>14:00:00</td>
-                            <td>15:00:00</td>
-                            <td>1</td>
-                            <td>2026-02-22 10:30:00</td> -->
+                            <td><?= $b["booking_id"] ?></td>
+                            <td><?= htmlspecialchars($b["service"]) ?></td>
+                            <td><?= htmlspecialchars($b["subservice"]) ?></td>
+                            <td><?= htmlspecialchars(date("F j, Y", strtotime($b["date"]))) ?></td>
+                            <td><?= htmlspecialchars(date("g:i a", strtotime($b["start_time"]))) . " to " . date("g:i a", strtotime($b["end_time"]))?></td>
+                            <td><?= htmlspecialchars($b["status_name"]) ?></td>
+                            <td>
+                                <?php if ($b["status_name"] === "Pending"): ?>
+                                    <a href="editbooking.php?booking_id=<?= $b["booking_id"] ?>"><button class="reschedButton">Reschedule</button></a>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

@@ -36,7 +36,10 @@
         <div>
             <h2>Glow fab Skin Care Spa</h2>
             <h3>GLOW YOU DAY WITH GLOW FAB SKIN CARE SPA</h3>
-            <a href="booking.php"><button class="primaryButton">Book Now</button></a>
+            <span>
+                <a href="booking.php"><button class="primaryButton">Book Now</button></a>
+                <a href="mybookings.php"><button class="secondaryButton">My Bookings</button></a>
+            </span>
         </div>
     </section>
 
