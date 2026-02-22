@@ -9,20 +9,6 @@
 
     $errorMessage = "";
 
-    // Auto-load user details
-    $query = "SELECT lastname, firstname, middlename, email, contact_number FROM users WHERE user_id = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("s", $_SESSION["user_id"]);
-    $stmt->execute();
-    $result = $stmt->get_result()->fetch_assoc();
-
-    $lastname = $result["lastname"];
-    $firstname = $result["firstname"];
-    $middlename = $result["middlename"];
-    $email = $result["email"];
-    $contactNumber = $result["contact_number"];
-    $fullname = $lastname . ', ' . $firstname . ' ' . $middlename;
-
     // Fetch services
     $query = "SELECT service_id, name, description FROM services";
     $stmt = $conn->query($query);
@@ -30,19 +16,19 @@
     $serviceList = $result;
 
     // Fetch subservices
-    $query = "SELECT subservice_id, service_id, name, description, price FROM subservices";
+    $query = "
+    SELECT sb.subservice_id, sb.service_id, sb.name, sb.description, sb.price, s.name AS service_name
+    FROM subservices sb
+    JOIN services s ON sb.service_id = s.service_id";
     $result = $conn->query($query);
     $subserviceList = $result->fetch_all(MYSQLI_ASSOC);
-    $subservicesByService = [];
+    $groupedSubservices = [];
     foreach ($subserviceList as $sub) {
-        $subservicesByService[$sub['service_id']][] = $sub;
+        $groupedSubservices[$sub['service_name']][] = $sub;
     }
 
     // Submit booking
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        $fullname = trim($_POST["fullname"]);
-        $email = trim($_POST["email"]);
-        $phone = trim($_POST["phone"]);
         $service = trim($_POST["service"]);
         $subservice = trim($_POST["subservice"]);
         $time = trim($_POST["time"]);
@@ -53,7 +39,6 @@
 
         $timeStart = date("H:i:s", strtotime($time1));
         $timeEnd = date("H:i:s", strtotime($time2));
-        // echo "<script>alert('$time1 $time2');</script>";
 
         $defaultStatus = 1;
 
@@ -97,11 +82,11 @@
                 <h1>Book an Appointment</h1>
                 <form method="POST">
 
-                    <input type="text" name="fullname" placeholder="Full Name" value="<?= htmlspecialchars($fullname) ?>" required>
+                    <!-- <input type="text" name="fullname" placeholder="Full Name" value="<?= htmlspecialchars($fullname) ?>" required>
                     <div class="hContainer"> 
                         <input type="text" name="email" placeholder="Email" value="<?= htmlspecialchars($email) ?>" required>
                         <input type="text" name="phone" placeholder="Contact Number" value="<?= htmlspecialchars($contactNumber) ?>" required>
-                    </div>
+                    </div> -->
 
                     <div class="hContainer">
                         <select name="service" id="service" required>
@@ -113,16 +98,14 @@
                             <?php endforeach; ?>
                         </select>
                         <select name="subservice" id="subservice" required>
-                            <option value="">Sub-Service</option>
-                            <option value="Sub-adsasdasd">Sub-adsasdasd</option>
                         </select>
                     </div>
 
                     <input type="date" name="date" required>
 
                     <select name="time" id="time">
-                        <option>11am - 12am</option>
-                        <option>12am - 1pm</option>
+                        <option>11am - 12pm</option>
+                        <option>12pm - 1pm</option>
                         <option>1pm - 2pm</option>
                         <option>2pm - 3pm</option>
                         <option>3pm - 4pm</option>
@@ -135,8 +118,33 @@
 
                     <input type="submit" value="Confirm Booking">
                 </form>
+
+                
             </div>
         </section>
         
+        <script>
+            const subservices = <?= json_encode($subserviceList) ?>;
+            const serviceSelect = document.getElementById('service');
+            const subserviceSelect = document.getElementById('subservice');
+                                
+            console.log(subservices);
+            serviceSelect.addEventListener('change', function() {
+                const selectedServiceName = this.value;
+
+                console.log(selectedServiceName);
+                subserviceSelect.innerHTML = '';
+                subserviceSelect.innerHTML = '<option value="">Choose a sub-service</option>';
+
+                subservices.forEach(sub => {
+                    if (sub["service_name"] === selectedServiceName) {
+                        const option = document.createElement('option');
+                        option.value = sub.id;
+                        option.textContent = sub.name;
+                        subserviceSelect.appendChild(option);
+                    }
+                });
+            });
+        </script>
     </body>
 </html>
