@@ -70,6 +70,26 @@
     foreach ($subserviceList as $sub) {
         $groupedSubservices[$sub['service_name']][] = $sub;
     }
+
+
+    $query = "
+        SELECT b.*, CONCAT(u.lastname, ' ',u.firstname, ' ',u.middlename) as user_name, s.name as status_name
+        FROM bookings b
+        JOIN users u ON b.user_id = u.user_id
+        JOIN status s ON b.status_id = s.status_id";
+    $stmt = $conn->query($query);
+    $result = $stmt->fetch_all(MYSQLI_ASSOC);
+
+    $allAppointments = $result;
+
+    $query = "
+        SELECT *
+        FROM users
+        WHERE role = \"client\"";
+    $stmt = $conn->query($query);
+    $result = $stmt->fetch_all(MYSQLI_ASSOC);
+
+    $allClients = $result;
 ?>
 
 <!DOCTYPE html>
@@ -230,6 +250,68 @@
                             <td><?= htmlspecialchars($s["description"]) ?></td>
                             <td><?= htmlspecialchars($s["price"]) ?></td>
                             <td><a href="deleteService.php?subservice_id=<?= $s["subservice_id"] ?>"><button class="deleteButton">Delete</button></a></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <?php elseif ($page == "appointments"): ?>
+        <h1>Appointments</h1>
+
+        <div class="cardContainer">
+            <div class="infoCard bookingTableCard">
+                // search control here
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Client Name</th>
+                            <th>Service</th>
+                            <th>Sub-Service</th>
+                            <th>Date</th>
+                            <th>Time Slot</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($allAppointments as $a): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($a["user_name"]) ?></td>
+                            <td><?= htmlspecialchars($a["service"]) ?></td>
+                            <td><?= htmlspecialchars($a["subservice"]) ?></td>
+                            <td><?= htmlspecialchars(date("F j, Y", strtotime($a["date"]))) ?></td>
+                            <td><?= htmlspecialchars(date("g:i a", strtotime($a["start_time"]))) . " to " . date("g:i a", strtotime($a["end_time"])) ?></td>
+                            <td><?= htmlspecialchars($a["status_name"]) ?></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <?php elseif ($page == "clients"): ?>
+        <h1>Clients</h1>
+
+        <div class="cardContainer">
+            <div class="infoCard bookingTableCard">
+                // search control here
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Last Name</th>
+                            <th>First Name</th>
+                            <th>Middle Name</th>
+                            <th>Email</th>
+                            <th>Contact Number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($allClients as $c): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($c["lastname"]) ?></td>
+                            <td><?= htmlspecialchars($c["firstname"]) ?></td>
+                            <td><?= htmlspecialchars($c["middlename"]) ?></td>
+                            <td><?= htmlspecialchars($c["email"]) ?></td>
+                            <td><?= htmlspecialchars($c["contact_number"]) ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>

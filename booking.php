@@ -113,12 +113,6 @@
                 <h1>Book an Appointment</h1>
                 <form method="POST">
 
-                    <!-- <input type="text" name="fullname" placeholder="Full Name" value="<?= htmlspecialchars($fullname) ?>" required>
-                    <div class="hContainer"> 
-                        <input type="text" name="email" placeholder="Email" value="<?= htmlspecialchars($email) ?>" required>
-                        <input type="text" name="phone" placeholder="Contact Number" value="<?= htmlspecialchars($contactNumber) ?>" required>
-                    </div> -->
-
                     <div class="hContainer">
                         <select name="service" id="service" required>
                             <option value="">Choose a service</option>
