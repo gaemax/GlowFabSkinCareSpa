@@ -100,8 +100,7 @@ body {
 }
 
 .infoCard:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
 }
 
 .infoCard h1 {
@@ -131,13 +130,19 @@ body {
     justify-content: center;
 }
 
+.bookingTableCard {
+    overflow-x: auto;
+}
+
 .bookingTableCard table {
-    border-radius: 1rem;
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .bookingTableCard table tr th,
 .bookingTableCard table tr td {
-    text-align: center;
+    text-align: left;
 }
 
 .bookingTableCard table tr th {
@@ -147,4 +152,58 @@ body {
 
 .bookingTableCard table tr td {
     padding: 1rem;
+}
+
+
+
+
+
+.bookingCard {
+    padding: 1rem 0;
+}
+
+.bookingCard form input[type="text"],
+.bookingCard form input[type="date"],
+.bookingCard form select {
+    padding: 0.5rem 1rem;
+
+    border: 1px solid #dcdcdc;
+    border-radius: 0.75rem;
+
+    font-size: 0.75rem;
+    font-family: inherit;
+}
+
+.bookingCard form input[type="submit"] {
+    background-color: var(--secondary-color);
+    cursor: pointer;
+    
+    padding: 0.5rem 1rem;
+    border-radius: 0.75rem; 
+
+    font-size: 0.75rem;
+    font-family: inherit;
+
+    transition: all 300ms;
+}
+
+
+
+
+
+.deleteButton {
+    background-color: var(--dark-color);
+    color: var(--light-pink-color);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+
+    border: 0;
+    border-radius: 2rem;
+
+    font-size: 1rem;
+
+    transition: all 300ms;
+}
+.deleteButton:hover {
+    scale: 1.1;
 }
