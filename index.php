@@ -170,55 +170,45 @@
     <?php
         $staffs = [
             [
-                "name" => "Staff Name1",
-                "role" => "Staff Role",
+                "name" => "Inna Jayne C. Lopez",
+                "role" => "CEO  / Spa Manager ",
                 "imgSource" => "images/staff.jpg"
             ],
             [
-                "name" => "Staff Name2",
-                "role" => "Staff Role",
+                "name" => "Rosanna Bolaño",
+                "role" => "Receptionists / Front Desk Staff ",
                 "imgSource" => "images/staff.jpg"
             ],
             [
-                "name" => "Staff Name3",
-                "role" => "Staff Role",
+                "name" => "Charles Manayon",
+                "role" => "Therapists / Aestheticians",
                 "imgSource" => "images/staff.jpg"
             ],
             [
-                "name" => "Staff Name4",
-                "role" => "Staff Role",
+                "name" => "Jowie L. Cruz",
+                "role" => "Therapists / Aestheticians",
                 "imgSource" => "images/staff.jpg"
             ],
             [
-                "name" => "Staff Name5",
-                "role" => "Staff Role",
+                "name" => "Dimple Mariel Italia",
+                "role" => "Therapists / Aestheticians",
                 "imgSource" => "images/staff.jpg"
             ],
             [
-                "name" => "Staff Name6",
-                "role" => "Staff Role",
+                "name" => "Joy Cuatrona",
+                "role" => "Massage Therapist",
                 "imgSource" => "images/staff.jpg"
             ],
             [
-                "name" => "Staff Name7",
-                "role" => "Staff Role",
+                "name" => "James Francis Cruz",
+                "role" => "Nail Technicians",
                 "imgSource" => "images/staff.jpg"
             ],
             [
-                "name" => "Staff Name8",
-                "role" => "Staff Role",
+                "name" => "Norie Cabus",
+                "role" => "Nail Technicians",
                 "imgSource" => "images/staff.jpg"
             ],
-            [
-                "name" => "Staff Name9",
-                "role" => "Staff Role",
-                "imgSource" => "images/staff.jpg"
-            ],
-            [
-                "name" => "Staff Name10",
-                "role" => "Staff Role",
-                "imgSource" => "images/staff.jpg"
-            ]
         ];
     ?>
 
