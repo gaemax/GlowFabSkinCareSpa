@@ -100,19 +100,52 @@
         $groupedSubservices[$sub['service_name']][] = $sub;
     }
 
+    $statusId = $_GET['status_id'] ?? null;
+    $serviceId = $_GET['service_id'] ?? null;
+    $date = $_GET['date'] ?? null;
+    
+    $where = [];
+    $params = [];
+    $types = "";
+    
+    if ($statusId) {
+        $where[] = "b.status_id = ?";
+        $params[] = $statusId;
+        $types .= "i"; // integer
+    }
+
+    if ($serviceId) {
+        $where[] = "b.service_id = ?";
+        $params[] = $serviceId;
+        $types .= "i";
+    }
+
+    if ($date) {
+        $where[] = "b.date = ?";
+        $params[] = $date;
+        $types .= "s"; // string
+    }
+
+    $whereSQL = "";
+    if (!empty($where)) {
+        $whereSQL = "WHERE " . implode(" AND ", $where);
+    }
 
     $query = "
         SELECT 
             b.*,
-            CONCAT(u.lastname, ', ',u.firstname, ' ',u.middlename) as user_name,
-            s.name as status_name,
-            sr.name as service,
-            sbsr.name as subservice
+            CONCAT(u.lastname, ', ', u.firstname, ' ', u.middlename) AS user_name,
+            s.name AS status_name,
+            sr.name AS service,
+            sbsr.name AS subservice
         FROM bookings b
         JOIN users u ON b.user_id = u.user_id
         JOIN status s ON b.status_id = s.status_id
         JOIN services sr ON b.service_id = sr.service_id
-        JOIN subservices sbsr ON b.subservice_id = sbsr.subservice_id";
+        JOIN subservices sbsr ON b.subservice_id = sbsr.subservice_id
+        $whereSQL
+        ORDER BY b.date
+    ";
     $stmt = $conn->query($query);
     $result = $stmt->fetch_all(MYSQLI_ASSOC);
 
@@ -185,9 +218,14 @@
     $result = $stmt->get_result()->fetch_assoc();
     $messageResult = $result;
     
+    
+    
     if (!isset($messageResult)) {
+        $messageResult["not_chosen_state"] = true;
         $messageResult["user_name"] = "No Chosen Message";
         $messageResult["messageBody"] = "Choose a message to view";
+    } else {
+        $messageResult["not_chosen_state"] = false;
     }
 
 ?>
@@ -210,7 +248,7 @@
             <li><a href="admin.php?page=servicemanager">Service Manager</a></li>
             <li><a href="admin.php?page=appointments">Appointments</a></li>
             <li><a href="admin.php?page=clients">Clients</a></li>
-            <li><a href="admin.php?page=reports">Reports</a></li>
+            <!-- <li><a href="admin.php?page=reports">Reports</a></li> -->
             <li><a href="admin.php?page=calendar&year=2026">Calendar</a></li>
             <li><a href="admin.php?page=messages">Messages</a></li>
             <li><a href="logout.php">Logout</a></li>
@@ -361,7 +399,6 @@
 
         <div class="cardContainer">
             <div class="infoCard bookingTableCard">
-                // search control here
                 <table>
                     <thead>
                         <tr>
@@ -385,7 +422,7 @@
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
-                </table>
+                </table>    
             </div>
         </div>
     <?php elseif ($page == "clients"): ?>
@@ -393,7 +430,6 @@
 
         <div class="cardContainer">
             <div class="infoCard bookingTableCard">
-                // search control here
                 <table>
                     <thead>
                         <tr>
@@ -508,7 +544,7 @@
                     <a href="admin.php?page=messages&message_id=<?= $m['message_id'] ?>" ?>
                         <div class="messageItem">
                             <h3><?= htmlspecialchars($m["user_name"]) ?></h3>
-                            <h5><?= htmlspecialchars(date("F j, Y", strtotime($m["date"]))) ?></h5>
+                            <h5><?= htmlspecialchars(date("F j, Y, g:i A", strtotime($m["date"]))) ?></h5>
                             <p><?= htmlspecialchars($m["messageBody"]) ?></p>
                         </div>
                     </a>
@@ -516,7 +552,9 @@
             </div>
             <div class="messageDetails">
                 <h1><?= htmlspecialchars($messageResult["user_name"]) ?></h1>
-                <p>Date Sent: <?= htmlspecialchars(date("F j, Y, g:i A", strtotime($messageResult["date"]))) ?></p>
+                <?php if(!$messageResult["not_chosen_state"]): ?>
+                    <p>Date Sent: <?= htmlspecialchars(date("F j, Y, g:i A", strtotime($messageResult["date"]))) ?></p>
+                <?php endif; ?>
                 <p><?= htmlspecialchars($messageResult["messageBody"])  ?></p>
             </div>
         </div>
