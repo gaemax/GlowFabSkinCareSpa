@@ -36,43 +36,67 @@
     }
 
     // Submit booking
+    $errorMessage = "";
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $service = trim($_POST["service"]);
         $subservice = trim($_POST["subservice"]);
         $time = trim($_POST["time"]);
         $date = trim($_POST["date"]);
+        $defaultStatus = 1;
 
         $time1 = explode(" - ", $time)[0];
         $time2 = explode(" - ", $time)[1];
-
         $timeStart = date("H:i:s", strtotime($time1));
         $timeEnd = date("H:i:s", strtotime($time2));
-        // echo "<script>alert('$time1 $time2');</script>";
-
-        $defaultStatus = 1;
 
         $query = "
-        UPDATE bookings 
-        SET service = ?, 
-            subservice = ?, 
-            date = ?, 
-            start_time = ?, 
-            end_time = ?
-        WHERE booking_id = ?";
+            SELECT *
+            FROM bookings
+            WHERE date = ?
+            AND service = ?
+            AND subservice = ?
+            AND (start_time = ? AND end_time = ?)
+        ";
         $stmt = $conn->prepare($query);
         $stmt->bind_param(
-            "sssssi",
+            "sssss",
+            $date,
             $service,
             $subservice,
-            $date,
             $timeStart,
-            $timeEnd,
-            $bookingId
+            $timeEnd
         );
         $stmt->execute();
+        $result = $stmt->get_result();
 
-        header("Location: mybookings.php");
-        exit;
+        if ($result->num_rows > 0) {
+            $errorMessage = "Time slot is taken, please choose another";
+        }
+
+        if ($errorMessage === "") {
+            $query = "
+            UPDATE bookings 
+            SET service = ?, 
+                subservice = ?, 
+                date = ?, 
+                start_time = ?, 
+                end_time = ?
+            WHERE booking_id = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param(
+                "sssssi",
+                $service,
+                $subservice,
+                $date,
+                $timeStart,
+                $timeEnd,
+                $bookingId
+            );
+            $stmt->execute();
+
+            header("Location: mybookings.php");
+            exit;
+        }
     }
     
 ?>
@@ -131,6 +155,7 @@
                     </select>
 
                     <input type="submit" value="Confirm Booking">
+                    <p class="errorMessage"><?= htmlspecialchars($errorMessage) ?></p>
                 </form>
             </div>
         </section>

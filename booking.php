@@ -26,23 +26,47 @@
     foreach ($subserviceList as $sub) {
         $groupedSubservices[$sub['service_name']][] = $sub;
     }
-
+    
     // Submit booking
+    $errorMessage = "";
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $service = trim($_POST["service"]);
         $subservice = trim($_POST["subservice"]);
         $time = trim($_POST["time"]);
         $date = trim($_POST["date"]);
+        $defaultStatus = 1;
 
         $time1 = explode(" - ", $time)[0];
         $time2 = explode(" - ", $time)[1];
-
         $timeStart = date("H:i:s", strtotime($time1));
         $timeEnd = date("H:i:s", strtotime($time2));
 
-        $defaultStatus = 1;
+        $query = "
+            SELECT *
+            FROM bookings
+            WHERE date = ?
+            AND service = ?
+            AND subservice = ?
+            AND (start_time = ? AND end_time = ?)
+        ";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param(
+            "sssss",
+            $date,
+            $service,
+            $subservice,
+            $timeStart,
+            $timeEnd
+        );
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        $query = "INSERT INTO bookings 
+        if ($result->num_rows > 0) {
+            $errorMessage = "Time slot is taken, please choose another";
+        }
+
+        if ($errorMessage === "") {
+            $query = "INSERT INTO bookings 
             (user_id, service, subservice, date, start_time, end_time, status_id)
             VALUES (?, ?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($query);
@@ -57,6 +81,9 @@
                 $defaultStatus
             );
             $stmt->execute();
+        } else {
+
+        }
     }
     
 ?>
@@ -121,6 +148,7 @@
                     </select>
 
                     <input type="submit" value="Confirm Booking">
+                    <p class="errorMessage"><?= htmlspecialchars($errorMessage) ?></p>
                 </form>
 
                 
@@ -143,7 +171,7 @@
                 subservices.forEach(sub => {
                     if (sub["service_name"] === selectedServiceName) {
                         const option = document.createElement('option');
-                        option.value = sub.id;
+                        option.value = sub.name;
                         option.textContent = sub.name;
                         subserviceSelect.appendChild(option);
                     }
