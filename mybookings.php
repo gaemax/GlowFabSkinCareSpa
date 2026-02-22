@@ -9,6 +9,7 @@
 
     $query = "
         SELECT 
+            b.booking_id,
             b.date,
             b.start_time,
             b.end_time,
@@ -19,8 +20,8 @@
         JOIN users u ON b.user_id = u.user_id
         JOIN status s ON b.status_id = s.status_id
         JOIN services sr ON b.service_id = sr.service_id
-        JOIN subservices sbsr ON b.subservice_id = sr.subservice_id
-        WHERE user_id = ?
+        JOIN subservices sbsr ON b.subservice_id = sbsr.subservice_id
+        WHERE b.user_id = ?
     ";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("s", $_SESSION["user_id"]);
@@ -74,7 +75,9 @@
                             <td><?= htmlspecialchars($b["status_name"]) ?></td>
                             <td>
                                 <?php if ($b["status_name"] === "Pending"): ?>
-                                    <a href="editbooking.php?booking_id=<?= $b["booking_id"] ?>"><button class="reschedButton">Reschedule</button></a>
+                                    <a href="editbooking.php?booking_id=<?= $b["booking_id"] ?>">
+                                        <button class="reschedButton">Reschedule</button>
+                                    </a>
                                 <?php endif; ?>
                             </td>
                         </tr>

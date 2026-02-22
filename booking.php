@@ -10,16 +10,28 @@
     $errorMessage = "";
 
     // Fetch services
-    $query = "SELECT service_id, name, description FROM services";
+    $query = "
+        SELECT
+            service_id,
+            name,
+            description
+        FROM services
+    ";
     $stmt = $conn->query($query);
     $result = $stmt->fetch_all(MYSQLI_ASSOC);
     $serviceList = $result;
 
     // Fetch subservices
     $query = "
-    SELECT sb.subservice_id, sb.service_id, sb.name, sb.description, sb.price, s.name AS service_name
-    FROM subservices sb
-    JOIN services s ON sb.service_id = s.service_id";
+        SELECT
+            sb.subservice_id,
+            sb.service_id,
+            sb.name,
+            sb.description,
+            sb.price,
+            s.name AS service_name
+        FROM subservices sb
+        JOIN services s ON sb.service_id = s.service_id";
     $result = $conn->query($query);
     $subserviceList = $result->fetch_all(MYSQLI_ASSOC);
     $groupedSubservices = [];
@@ -41,17 +53,20 @@
         $timeStart = date("H:i:s", strtotime($time1));
         $timeEnd = date("H:i:s", strtotime($time2));
 
+        // $alertMsg = "Service: $service\nSubservice: $subservice\nDate: $date\nStart Time: $timeStart\nEnd Time: $timeEnd";
+        // die($alertMsg);
+
         $query = "
-            SELECT *
+            SELECT booking_id
             FROM bookings
             WHERE date = ?
-            AND service = ?
-            AND subservice = ?
-            AND (start_time = ? AND end_time = ?)
-        ";
+            AND service_id = ?
+            AND subservice_id = ?
+            AND start_time = ?
+            AND end_time = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param(
-            "sssss",
+            "siiss",
             $date,
             $service,
             $subservice,
@@ -66,9 +81,10 @@
         }
 
         if ($errorMessage === "") {
-            $query = "INSERT INTO bookings 
-            (user_id, service, subservice, date, start_time, end_time, status_id)
-            VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $query = "
+                INSERT INTO bookings 
+                (user_id, service_id, subservice_id, date, start_time, end_time, status_id)
+                VALUES (?, ?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($query);
             $stmt->bind_param(
                 "isssssi",
@@ -81,6 +97,8 @@
                 $defaultStatus
             );
             $stmt->execute();
+
+            header("Location: mybookings.php");
         } else {
 
         }
@@ -163,10 +181,10 @@
                 subserviceSelect.innerHTML = '<option value="">Choose a sub-service</option>';
 
                 subservices.forEach(sub => {
-                    if (sub["service_name"] === selectedServiceName) {
+                    if (sub["service_id"] === selectedServiceName) {
                         const option = document.createElement('option');
-                        option.value = sub.id;
-                        option.textContent = sub.name;
+                        option.value = sub["subservice_id"];
+                        option.textContent = sub["name"];
                         subserviceSelect.appendChild(option);
                     }
                 });

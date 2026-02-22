@@ -18,16 +18,28 @@
     $errorMessage = "";
 
     // Fetch services
-    $query = "SELECT service_id, name, description FROM services";
+    $query = "
+        SELECT
+            service_id,
+            name,
+            description
+        FROM services
+    ";
     $stmt = $conn->query($query);
     $result = $stmt->fetch_all(MYSQLI_ASSOC);
     $serviceList = $result;
 
     // Fetch subservices
     $query = "
-    SELECT sb.subservice_id, sb.service_id, sb.name, sb.description, sb.price, s.name AS service_name
-    FROM subservices sb
-    JOIN services s ON sb.service_id = s.service_id";
+        SELECT
+            sb.subservice_id,
+            sb.service_id,
+            sb.name,
+            sb.description,
+            sb.price,
+            s.name AS service_name
+        FROM subservices sb
+        JOIN services s ON sb.service_id = s.service_id";
     $result = $conn->query($query);
     $subserviceList = $result->fetch_all(MYSQLI_ASSOC);
     $groupedSubservices = [];
@@ -35,7 +47,7 @@
         $groupedSubservices[$sub['service_name']][] = $sub;
     }
 
-    // Submit booking
+    /// Submit booking
     $errorMessage = "";
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $service = trim($_POST["service"]);
@@ -49,17 +61,20 @@
         $timeStart = date("H:i:s", strtotime($time1));
         $timeEnd = date("H:i:s", strtotime($time2));
 
+        // $alertMsg = "Service: $service\nSubservice: $subservice\nDate: $date\nStart Time: $timeStart\nEnd Time: $timeEnd";
+        // die($alertMsg);
+
         $query = "
-            SELECT *
+            SELECT booking_id
             FROM bookings
             WHERE date = ?
-            AND service = ?
-            AND subservice = ?
-            AND (start_time = ? AND end_time = ?)
-        ";
+            AND service_id = ?
+            AND subservice_id = ?
+            AND start_time = ?
+            AND end_time = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param(
-            "sssss",
+            "siiss",
             $date,
             $service,
             $subservice,
@@ -76,8 +91,8 @@
         if ($errorMessage === "") {
             $query = "
             UPDATE bookings 
-            SET service = ?, 
-                subservice = ?, 
+            SET service_id = ?, 
+                subservice_id = ?, 
                 date = ?, 
                 start_time = ?, 
                 end_time = ?
@@ -96,6 +111,8 @@
 
             header("Location: mybookings.php");
             exit;
+        } else {
+
         }
     }
     
@@ -142,8 +159,8 @@
                     <input type="date" name="date" required>
 
                     <select name="time" id="time">
-                        <option>11am - 12am</option>
-                        <option>12am - 1pm</option>
+                        <option>11am - 12pm</option>
+                        <option>12pm - 1pm</option>
                         <option>1pm - 2pm</option>
                         <option>2pm - 3pm</option>
                         <option>3pm - 4pm</option>
@@ -174,10 +191,10 @@
                 subserviceSelect.innerHTML = '<option value="">Choose a sub-service</option>';
 
                 subservices.forEach(sub => {
-                    if (sub["service_name"] === selectedServiceName) {
+                    if (sub["service_id"] === selectedServiceName) {
                         const option = document.createElement('option');
-                        option.value = sub.id;
-                        option.textContent = sub.name;
+                        option.value = sub["subservice_id"];
+                        option.textContent = sub["name"];
                         subserviceSelect.appendChild(option);
                     }
                 });
