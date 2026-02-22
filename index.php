@@ -1,7 +1,23 @@
 <?php
+    require "db.php";
     session_start();
     if(!isset($_SESSION["loggedin"])) {
         header("location: login.php");
+    }
+
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        $message = trim($_POST["message"]);
+
+        $query = "INSERT INTO messages 
+        (user_id, messageBody)
+        VALUES (?, ?)";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param(
+            "is",
+            $_SESSION["user_id"],
+            $message
+        );
+        $stmt->execute();
     }
 ?>
 
@@ -329,11 +345,11 @@
                 </ul>
             </div>
             <div class="contactForm">
-                <form action="" class="contactCard">
+                <form method="POST" class="contactCard">
                     <label>Send us a Message for Home Service</label>
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
-                    <textarea placeholder="Your Message" required></textarea>
+                    <!-- <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required> -->
+                    <textarea name="message" placeholder="Your Message" required></textarea>
                     <input type="submit">
                 </form>
             </div>

@@ -377,7 +377,7 @@
 
 .contactSection .contactContainer .contactForm .contactCard textarea {
     resize: vertical;
-    height: 10rem;
+    height: 20rem;
 }
 
 .contactSection .contactContainer .contactForm .contactCard input[type="submit"] {
