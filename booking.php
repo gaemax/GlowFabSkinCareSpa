@@ -117,7 +117,7 @@
                         <select name="service" id="service" required>
                             <option value="">Choose a service</option>
                             <?php foreach($serviceList as $s): ?>
-                                <option value="<?= htmlspecialchars($s["name"]) ?>">
+                                <option value="<?= htmlspecialchars($s["service_id"]) ?>">
                                     <?= htmlspecialchars($s["name"]) ?>
                                 </option>
                             <?php endforeach; ?>
@@ -165,7 +165,7 @@
                 subservices.forEach(sub => {
                     if (sub["service_name"] === selectedServiceName) {
                         const option = document.createElement('option');
-                        option.value = sub.name;
+                        option.value = sub.id;
                         option.textContent = sub.name;
                         subserviceSelect.appendChild(option);
                     }

@@ -8,9 +8,18 @@
     }
 
     $query = "
-        SELECT b.*, s.name AS status_name
+        SELECT 
+            b.date,
+            b.start_time,
+            b.end_time,
+            s.name as status_name,
+            sr.name as service,
+            sbsr.name as subservice
         FROM bookings b
-        JOIN status s on b.status_id = s.status_id
+        JOIN users u ON b.user_id = u.user_id
+        JOIN status s ON b.status_id = s.status_id
+        JOIN services sr ON b.service_id = sr.service_id
+        JOIN subservices sbsr ON b.subservice_id = sr.subservice_id
         WHERE user_id = ?
     ";
     $stmt = $conn->prepare($query);

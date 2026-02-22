@@ -58,11 +58,18 @@
 
     $date = date("Y-m-d");
     $query = "
-        SELECT b.*, CONCAT(u.lastname, ' ',u.firstname, ' ',u.middlename) as user_name, s.name as status_name
+        SELECT 
+            b.*,
+            CONCAT(u.lastname, ' ',u.firstname, ' ',u.middlename) as user_name,
+            s.name as status_name,
+            sr.name as service,
+            sbsr.name as subservice
         FROM bookings b
         JOIN users u ON b.user_id = u.user_id
         JOIN status s ON b.status_id = s.status_id
-        WHERE date = ?";
+        JOIN services sr ON b.service_id = sr.service_id
+        JOIN subservices sbsr ON b.subservice_id = sbsr.subservice_id
+        WHERE b.date = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("s", $date);
     $stmt->execute();
@@ -91,10 +98,17 @@
 
 
     $query = "
-        SELECT b.*, CONCAT(u.lastname, ' ',u.firstname, ' ',u.middlename) as user_name, s.name as status_name
+        SELECT 
+            b.*,
+            CONCAT(u.lastname, ' ',u.firstname, ' ',u.middlename) as user_name,
+            s.name as status_name,
+            sr.name as service,
+            sbsr.name as subservice
         FROM bookings b
         JOIN users u ON b.user_id = u.user_id
-        JOIN status s ON b.status_id = s.status_id";
+        JOIN status s ON b.status_id = s.status_id
+        JOIN services sr ON b.service_id = sr.service_id
+        JOIN subservices sbsr ON b.subservice_id = sbsr.subservice_id";
     $stmt = $conn->query($query);
     $result = $stmt->fetch_all(MYSQLI_ASSOC);
 
@@ -161,7 +175,6 @@
             <li><a href="admin.php?page=appointments">Appointments</a></li>
             <li><a href="admin.php?page=clients">Clients</a></li>
             <li><a href="admin.php?page=reports">Reports</a></li>
-            <li><a href="admin.php?page=calendar&year=2026">Calendar</a></li>
             <li><a href="admin.php?page=calendar&year=2026">Calendar</a></li>
             <li><a href="admin.php?page=messages">Messages</a></li>
             <li><a href="logout.php">Logout</a></li>
@@ -299,7 +312,7 @@
                             <td><?= htmlspecialchars($s["name"]) ?></td>
                             <td><?= htmlspecialchars($s["service_name"]) ?></td>
                             <td><?= htmlspecialchars($s["description"]) ?></td>
-                            <td><?= htmlspecialchars($s["price"]) ?></td>
+                            <td>P <?= htmlspecialchars($s["price"]) ?></td>
                             <td><a href="deleteService.php?subservice_id=<?= $s["subservice_id"] ?>"><button class="deleteButton">Delete</button></a></td>
                         </tr>
                         <?php endforeach; ?>
@@ -398,12 +411,19 @@
                         <?php
                             $date = date("Y-m-d");
                             $query = "
-                                SELECT b.*, CONCAT(u.lastname, ' ',u.firstname, ' ',u.middlename) as user_name, s.name as status_name, sb.price as price
+                                SELECT 
+                                    b.*,
+                                    CONCAT(u.lastname, ' ',u.firstname, ' ',u.middlename) as user_name,
+                                    s.name as status_name,
+                                    sr.name as service,
+                                    sbsr.name as subservice,
+                                    sbsr.price as price
                                 FROM bookings b
                                 JOIN users u ON b.user_id = u.user_id
                                 JOIN status s ON b.status_id = s.status_id
-                                JOIN subservices sb ON b.subservice = sb.name
-                                WHERE YEAR(b.date) = ? AND MONTH(b.date) = ?";
+                                JOIN services sr ON b.service_id = sr.service_id
+                                JOIN subservices sbsr ON b.subservice_id = sbsr.subservice_id
+                                WHERE YEAR(date) = ? AND MONTH(date) = ?";
                             $stmt = $conn->prepare($query);
                             $stmt->bind_param(
                                 "ss", 

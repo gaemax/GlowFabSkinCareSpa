@@ -7,21 +7,21 @@
     $price = trim($_POST["price"]);
 
     $query = "
-    SELECT service_id
-    FROM services
-    WHERE name = ?";
+        SELECT service_id
+        FROM services
+        WHERE name = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param(
         "s",
-        $name
+        $parentService
     );
     $stmt->execute();
     $serviceId = $stmt->get_result();
 
     $query = "
-    SELECT subservice_id
-    FROM subservices
-    WHERE name = ?";
+        SELECT subservice_id
+        FROM subservices
+        WHERE name = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param(
         "s",
@@ -32,9 +32,9 @@
 
     if ($result->num_rows > 0) {
         $query = "
-        UPDATE subservices 
-        SET name = ?, service_id = ?, description = ?, price = ?
-        WHERE name = ?";
+            UPDATE subservices 
+            SET name = ?, service_id = ?, description = ?, price = ?
+            WHERE name = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param(
             "sisis",
