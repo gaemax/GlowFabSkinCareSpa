@@ -91,3 +91,46 @@ body {
     flex: 1 0 auto;
     box-sizing: border-box;
 }
+
+
+
+
+
+.bookingTableSection {
+    display: flex;
+    justify-content: center;
+}
+
+.bookingTableCard {
+    background-color: var(--white-color);
+
+    display: flex;
+    flex-direction: column;
+    min-width: 95%;
+    border-radius: 1rem;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+
+    padding: 0.5rem 3rem;
+    margin: 5vh;
+}
+
+.bookingTableCard table {
+    border: 1px black solid;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.bookingTableCard table tr th,
+.bookingTableCard table tr td {
+    text-align: center;
+    /* border: 1px red solid; */
+}
+
+.bookingTableCard table tr th {
+    background-color: var(--medium-gray-color);
+    padding: 1rem;
+}
+
+.bookingTableCard table tr td {
+    padding: 1rem;
+}
