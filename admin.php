@@ -11,11 +11,21 @@
     }
 
 
+    if (isset($_GET['year'])) {
+        $calendayYear = $_GET['year'];
+    } else {
+       $calendayYear = 0;
+    }
+
+
     if (isset($_GET['page'])) {
         $page = $_GET['page'];
     } else {
         $page ="dashboard";
+        $page ="dashboard";
     }
+
+    
 
     
     if (!$loggedIn) {
@@ -114,6 +124,22 @@
         "November",
         "December"
     ];
+
+
+    $months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+    ];
 ?>
 
 <!DOCTYPE html>
@@ -135,6 +161,7 @@
             <li><a href="admin.php?page=appointments">Appointments</a></li>
             <li><a href="admin.php?page=clients">Clients</a></li>
             <li><a href="admin.php?page=reports">Reports</a></li>
+            <li><a href="admin.php?page=calendar&year=2026">Calendar</a></li>
             <li><a href="admin.php?page=calendar&year=2026">Calendar</a></li>
             <li><a href="admin.php?page=messages">Messages</a></li>
             <li><a href="logout.php">Logout</a></li>
