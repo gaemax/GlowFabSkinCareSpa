@@ -226,3 +226,71 @@ body {
 .calendarTable th {
     background-color: var(--medium-gray-color);
 }
+
+
+
+
+
+.messageListContainer {
+    display: flex;
+    gap: 1rem;
+
+    max-height: 80vh;
+}
+
+.messageListContainer .messageList {
+    flex: 0 0 30%;
+    
+    background-color: var(--white-color);
+    border: none;
+    border-radius: 1rem;
+
+    padding: 0.5rem;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    overflow-y: scroll;
+}
+
+.messageListContainer .messageList a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.messageListContainer .messageList .messageItem {
+
+    border-radius: 1rem;
+    padding: 1rem 0.5rem;
+    transition: all 300ms;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+}
+
+.messageListContainer .messageList .messageItem p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+.messageListContainer .messageList .messageItem:hover {
+    background-color: var(--medium-gray-color);
+}
+
+.messageListContainer .messageList .messageItem * {
+    margin: 0;
+}
+
+.messageListContainer .messageDetails {
+    flex: 1 1 auto;
+
+    background-color: var(--white-color);
+    border-radius: 1rem;
+
+    max-height: 80h;
+
+    padding: 1rem;
+}

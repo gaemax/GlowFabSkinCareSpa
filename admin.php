@@ -25,7 +25,11 @@
         $page ="dashboard";
     }
 
-    
+    if (isset($_GET['message_id'])) {
+        $messageId = $_GET['message_id'];
+    } else {
+        $messageId = -1;
+    }
 
     
     if (!$loggedIn) {
@@ -60,7 +64,7 @@
     $query = "
         SELECT 
             b.*,
-            CONCAT(u.lastname, ' ',u.firstname, ' ',u.middlename) as user_name,
+            CONCAT(u.lastname, ', ',u.firstname, ' ',u.middlename) as user_name,
             s.name as status_name,
             sr.name as service,
             sbsr.name as subservice
@@ -100,7 +104,7 @@
     $query = "
         SELECT 
             b.*,
-            CONCAT(u.lastname, ' ',u.firstname, ' ',u.middlename) as user_name,
+            CONCAT(u.lastname, ', ',u.firstname, ' ',u.middlename) as user_name,
             s.name as status_name,
             sr.name as service,
             sbsr.name as subservice
@@ -154,6 +158,38 @@
         "November",
         "December"
     ];
+
+
+    $query = "
+        SELECT m.message_id,
+        m.messageBody,
+        m.created_at as date,
+        CONCAT(u.lastname, ', ',u.firstname, ' ',u.middlename) AS user_name
+        FROM messages m
+        JOIN users u ON m.user_id = u.user_id";
+    $stmt = $conn->query($query);
+    $result = $stmt->fetch_all(MYSQLI_ASSOC);
+    $messages = $result;
+
+    $query = "
+        SELECT m.message_id,
+        m.messageBody,
+        m.created_at as date,
+        CONCAT(u.lastname, ', ',u.firstname, ' ',u.middlename) AS user_name
+        FROM messages m
+        JOIN users u ON m.user_id = u.user_id
+        WHERE m.message_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $messageId);
+    $stmt->execute();
+    $result = $stmt->get_result()->fetch_assoc();
+    $messageResult = $result;
+    
+    if (!isset($messageResult)) {
+        $messageResult["user_name"] = "No Chosen Message";
+        $messageResult["messageBody"] = "Choose a message to view";
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -413,7 +449,7 @@
                             $query = "
                                 SELECT 
                                     b.*,
-                                    CONCAT(u.lastname, ' ',u.firstname, ' ',u.middlename) as user_name,
+                                    CONCAT(u.lastname, ', ',u.firstname, ' ',u.middlename) as user_name,
                                     s.name as status_name,
                                     sr.name as service,
                                     sbsr.name as subservice,
@@ -466,6 +502,24 @@
         </div>
     <?php elseif ($page == "messages"): ?>
         <h1>Messages</h1>
+        <div class="messageListContainer">
+            <div class="messageList">
+                <?php foreach($messages as $m): ?>
+                    <a href="admin.php?page=messages&message_id=<?= $m['message_id'] ?>" ?>
+                        <div class="messageItem">
+                            <h3><?= htmlspecialchars($m["user_name"]) ?></h3>
+                            <h5><?= htmlspecialchars(date("F j, Y", strtotime($m["date"]))) ?></h5>
+                            <p><?= htmlspecialchars($m["messageBody"]) ?></p>
+                        </div>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+            <div class="messageDetails">
+                <h1><?= htmlspecialchars($messageResult["user_name"]) ?></h1>
+                <p>Date Sent: <?= htmlspecialchars(date("F j, Y, g:i A", strtotime($messageResult["date"]))) ?></p>
+                <p><?= htmlspecialchars($messageResult["messageBody"])  ?></p>
+            </div>
+        </div>
     <?php endif; ?>
 
 </body>
