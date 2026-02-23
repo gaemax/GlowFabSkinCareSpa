@@ -408,6 +408,7 @@
                             <th>Date</th>
                             <th>Time Slot</th>
                             <th>Status</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -419,6 +420,19 @@
                             <td><?= htmlspecialchars(date("F j, Y", strtotime($a["date"]))) ?></td>
                             <td><?= htmlspecialchars(date("g:i a", strtotime($a["start_time"]))) . " to " . date("g:i a", strtotime($a["end_time"])) ?></td>
                             <td><?= htmlspecialchars($a["status_name"]) ?></td>
+                            <td>
+                                <form method="POST" action="changeStatus.php" class="editStatusForm">
+                                    <input type="hidden" name="booking_id" value="<?=$a["booking_id"]?>">
+                                    <select name="status_id" id="">
+                                        <option value=""></option>
+                                        <option value="1">Pending</option>
+                                        <option value="2">Approved</option>
+                                        <option value="3">Completed</option>
+                                        <option value="4">Cancelled</option>
+                                    </select>
+                                    <input type="submit" value="Set">
+                                </form>
+                            </td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
