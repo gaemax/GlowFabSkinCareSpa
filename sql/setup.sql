@@ -40,17 +40,21 @@ CREATE TABLE messages (
     user_id INT UNSIGNED NOT NULL,
     messageBody TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_messages_user FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT fk_messages_user 
+        FOREIGN KEY (user_id) 
+        REFERENCES users(user_id) 
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS services (
+CREATE TABLE services (
     service_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL UNIQUE,
     description TEXT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS subservices (
+CREATE TABLE subservices (
     subservice_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     service_id INT UNSIGNED NOT NULL,
     name VARCHAR(100) NOT NULL,
@@ -75,16 +79,28 @@ CREATE TABLE bookings (
     end_time TIME NOT NULL,
     status_id INT UNSIGNED NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
     CONSTRAINT fk_bookings_user 
-        FOREIGN KEY (user_id) REFERENCES users(user_id) 
-        ON DELETE CASCADE ON UPDATE CASCADE,
+        FOREIGN KEY (user_id) 
+        REFERENCES users(user_id) 
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE,
+
     CONSTRAINT fk_bookings_status 
-        FOREIGN KEY (status_id) REFERENCES status(status_id) 
-        ON DELETE RESTRICT ON UPDATE CASCADE,
+        FOREIGN KEY (status_id) 
+        REFERENCES status(status_id) 
+        ON DELETE RESTRICT 
+        ON UPDATE CASCADE,
+
     CONSTRAINT fk_bookings_service
-        FOREIGN KEY (service_id) REFERENCES services(service_id)
-        ON DELETE RESTRICT ON UPDATE CASCADE,
+        FOREIGN KEY (service_id) 
+        REFERENCES services(service_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+
     CONSTRAINT fk_bookings_subservice
-        FOREIGN KEY (subservice_id) REFERENCES subservices(subservice_id)
-        ON DELETE RESTRICT ON UPDATE CASCADE
+        FOREIGN KEY (subservice_id) 
+        REFERENCES subservices(subservice_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 ) ENGINE=InnoDB;
