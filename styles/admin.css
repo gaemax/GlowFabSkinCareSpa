@@ -294,3 +294,20 @@ body {
 
     padding: 1rem;
 }
+
+
+.editStatusForm {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.editStatusForm input,
+.editStatusForm select {
+    padding: 0.25rem 0.5rem;
+
+    border: 1px solid #dcdcdc;
+    border-radius: 0.75rem;
+
+    font-size: 0.75rem;
+    font-family: inherit;
+}
