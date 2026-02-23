@@ -3,7 +3,7 @@
     if(!isset($_SESSION["loggedin"])) {
         header("location: login.php");
     }
-?>
+?>  
 
 <html>  
     <head>
@@ -20,7 +20,6 @@
             <h1>Glow Fab</h1>
             <span>
                 <ul>
-                    <!-- <li><a href="#hero">Home</a></li> -->
                     <li><a href="#aboutUs">About Us</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#staff">Staff</a></li>
@@ -150,7 +149,7 @@
                     <h3><?= htmlspecialchars($service['serviceName']) ?></h3>
                     <p><?= htmlspecialchars($service['serviceDescription']) ?></p>
                 </div>
-            <?php endforeach; ?>
+            <?php endforeach; ?>    
         </div>
     </section>
 
