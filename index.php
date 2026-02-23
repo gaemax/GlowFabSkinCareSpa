@@ -38,6 +38,7 @@
             <h3>GLOW YOU DAY WITH GLOW FAB SKIN CARE SPA</h3>
             <a href="booking.php"><button class="primaryButton">Book Now</button></a>
             <a href="mybookings.php"><button class="secondaryButton">My Bookings</button></a>
+            <img src="images/logo01.png" alt="">
         </div>
     </section>
 
@@ -45,6 +46,7 @@
         <div>
             <h1>About Us!</h1>
             <p>Glow Fab Skin Care Spa is your go-to place for relaxation, beauty, and confidence. We offer quality skin care and beauty treatments designed to enhance your natural glow, using safe products and professional techniques. At Glow Fab, we believe that everyone deserves to feel beautiful, refreshed, and confident.</p>
+            <img src="images/logo02.png" alt="">
         </div>
     </section>
 
@@ -54,103 +56,87 @@
             [
                 "serviceName" => "Facial",
                 "serviceDescription" => "Facial Services",
-                "imgSource" => "images/facial.jpg"
+                "image" => "images/"
             ],
 
             [
                 "serviceName" => "Hydra",
-                "serviceDescription" => "Hydra Facial",
-                "imgSource" => "images/hydra.jpg"
+                "serviceDescription" => "Hydra Facial"
             ],
 
             [
                 "serviceName" => "Black Doll Carbon Laser",
-                "serviceDescription" => "Black Doll Carbon Laser",
-                "imgSource" => "images/black-doll.jpg"
+                "serviceDescription" => "Black Doll Carbon Laser"
             ],
 
             [
                 "serviceName" => "Microblading",
-                "serviceDescription" => "Massage Services",
-                "imgSource" => "images/microblading.jpg"
+                "serviceDescription" => "Massage Services"
             ],
 
             [
                 "serviceName" => "Eyelash Extension",
-                "serviceDescription" => "Eyelash Extension",
-                "imgSource" => "images/eyelashes.jpg"
+                "serviceDescription" => "Eyelash Extension"
             ],
 
             [
                 "serviceName" => "Gluta Push and Drip",
-                "serviceDescription" => "Gluta Push and Drip",
-                "imgSource" => "images/gluta.jpg"
+                "serviceDescription" => "Gluta Push and Drip"
             ],
 
             [
                 "serviceName" => "IPL Hair Removal",
-                "serviceDescription" => "IPL Hair Removal",
-                "imgSource" => "images/ipl.jpg"
+                "serviceDescription" => "IPL Hair Removal"
             ],
 
             [
                 "serviceName" => "Combro Brows",
-                "serviceDescription" => "Tattoo Removal",
-                "imgSource" => "images/combro.jpg"
+                "serviceDescription" => "Tattoo Removal"
             ],
 
             [
                 "serviceName" => "Hydra",
-                "serviceDescription" => "Microblading",
-                "imgSource" => "images/hydra2.jpg"
+                "serviceDescription" => "Microblading"
             ],
 
             [
                 "serviceName" => "Hydra",
-                "serviceDescription" => "Combro Brows",
-                "imgSource" => "images/hydra3.jpg"
+                "serviceDescription" => "Combro Brows"
             ],
 
             [
                 "serviceName" => "Rosy Lip Tattoo",
-                "serviceDescription" => "Rosy Lip Tattoo",
-                "imgSource" => "images/rosy-lip.jpg"
+                "serviceDescription" => "Rosy Lip Tattoo"
             ],
 
             [
                 "serviceName" => "HIFU (Face and Body)",
-                "serviceDescription" => "HIFU (Face and Body)",
-                "imgSource" => "images/hifu-face-body.jpg"
+                "serviceDescription" => "HIFU (Face and Body)"
             ],
 
             [
                 "serviceName" => "HIFU V-Max V-Lift",
-                "serviceDescription" => "HIFU V-Max V-Lift",
-                "imgSource" => "images/hifu-vmax.jpg"
+                "serviceDescription" => "HIFU V-Max V-Lift"
             ],
 
             [
                 "serviceName" => "Botox",
-                "serviceDescription" => "Botox",
-                "imgSource" => "images/botox.jpg"
+                "serviceDescription" => "Botox"
             ],
 
             [
                 "serviceName" => "Fillers",
-                "serviceDescription" => "Fillers",
-                "imgSource" => "images/fillers.jpg"
+                "serviceDescription" => "Fillers"
             ],
 
             [
                 "serviceName" => "Hiko Nose Threads",
-                "serviceDescription" => "Hiko Nose Threads",
-                "imgSource" => "images/hiko.jpg"
+                "serviceDescription" => "Hiko Nose Threads"
             ],
 
             [
                 "serviceName" => "Hydra",
-                "serviceDescription" => "Warts Removal",
-                "imgSource" => "images/hydra4.jpg"
+                "serviceDescription" => "Warts Removal"
             ]
         ];
     ?>
@@ -230,7 +216,8 @@
         $reviews = [
             [
                 "name" => "John Doe",
-                "reviewMessage" => "The service is very good!"
+                "reviewMessage" => "The service is very good!",
+                "imgSource" => "images/Reviews.png"
             ],
             [
                 "name" => "John Doe",
@@ -256,22 +243,6 @@
                 "name" => "John Doe",
                 "reviewMessage" => "The service is very good!"
             ],
-            [
-                "name" => "John Doe",
-                "reviewMessage" => "The service is very good!"
-            ],
-            [
-                "name" => "John Doe",
-                "reviewMessage" => "The service is very good!"
-            ],
-            [
-                "name" => "John Doe",
-                "reviewMessage" => "The service is very good!"
-            ],
-            [
-                "name" => "John Doe",
-                "reviewMessage" => "The service is very good!"
-            ]
         ];
     ?>
     
