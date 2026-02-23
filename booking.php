@@ -53,8 +53,6 @@
         $timeStart = date("H:i:s", strtotime($time1));
         $timeEnd = date("H:i:s", strtotime($time2));
 
-        // $alertMsg = "Service: $service\nSubservice: $subservice\nDate: $date\nStart Time: $timeStart\nEnd Time: $timeEnd";
-        // die($alertMsg);
 
         $query = "
             SELECT booking_id
@@ -120,7 +118,7 @@
         <div class="navigatorBar">
             <h1>Glow Fab</h1>
             <ul>
-                <li><a href="index.php">Home</a></li>
+                <li><a href="index.php">Back</a></li>
             </ul>
         </div>
         

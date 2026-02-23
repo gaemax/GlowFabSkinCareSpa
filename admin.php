@@ -245,12 +245,12 @@
         <h1>Glow Fab Admin</h1>
         <ul>
             <li><a href="admin.php?page=dashboard">Dashboard</a></li>
-            <li><a href="admin.php?page=servicemanager">Service Manager</a></li>
             <li><a href="admin.php?page=appointments">Appointments</a></li>
             <li><a href="admin.php?page=clients">Clients</a></li>
             <!-- <li><a href="admin.php?page=reports">Reports</a></li> -->
             <li><a href="admin.php?page=calendar&year=2026">Calendar</a></li>
             <li><a href="admin.php?page=messages">Messages</a></li>
+             <li><a href="admin.php?page=servicemanager">Service Manager</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
     </div>
