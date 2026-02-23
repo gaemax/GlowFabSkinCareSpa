@@ -1,29 +1,23 @@
 <?php
-    require "db.php";
+require "db.php";
 
-    $service_id = $_GET["service_id"];
-    $subservice_id = $_GET["subservice_id"];
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    die("Invalid access.");
+}
 
-    if (isset($service_id)) {
-        $query = "DELETE FROM services WHERE service_id = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param(
-            "i", $service_id
-        );
-        $stmt->execute();
-        echo "service";
-        header("Location: admin.php?page=servicemanager");
-        exit();
-    } else if (isset($subservice_id)) {
-        $query = "DELETE FROM subservices WHERE subservice_id = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param(
-            "i", $subservice_id
-        );
-        $stmt->execute();
-        echo "subservice";
-        header("Location: admin.php?page=servicemanager");
-        exit();
-    }
+if (!isset($_POST['subservice_id']) || !is_numeric($_POST['subservice_id'])) {
+    die("Invalid request.");
+}
 
+$id = intval($_POST['subservice_id']);
+
+$stmt = $conn->prepare("UPDATE subservices SET status='inactive' WHERE subservice_id=?");
+$stmt->bind_param("i", $id);
+
+if ($stmt->execute()) {
+    header("Location: services.php?deleted=1");
+    exit;
+} else {
+    echo "Database error.";
+}
 ?>
