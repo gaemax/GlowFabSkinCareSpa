@@ -4,11 +4,17 @@
 
     $errorMessage = "";
 
+    unset($_SESSION["loggedin"]);
+
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $email = trim($_POST["email"]);
         $password = trim($_POST["password"]);
 
-        $query = "SELECT user_id, password, role FROM users WHERE email = ?";
+        $query = "
+            SELECT user_id, password, role
+            FROM users
+            WHERE email = ?
+        ";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("s", $email);
         $stmt->execute();
@@ -16,7 +22,6 @@
 
         if ($result->num_rows === 1) {
             $user = $result->fetch_assoc();
-
             if (password_verify($password, $user["password"])) {
                 $_SESSION["loggedin"] = true;
                 $_SESSION["user_id"] = $user["user_id"];
@@ -24,18 +29,17 @@
             } else {
                 $errorMessage = "Email or Password is wrong";
             }
-
         } else {
             $errorMessage = "Email or Password is wrong";
         }
     }
 
-    if(isset($_SESSION["loggedin"])) {
+    if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
         if ($_SESSION["role"] === "client") {
             header("Location: mybookings.php");
             exit();
         } else if ($_SESSION["role"] === "staff" || $_SESSION["role"] === "admin") {
-            header("Location: index.php");
+            header("Location: admin.php");
             exit();
         }
     }
