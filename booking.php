@@ -74,6 +74,11 @@
         $stmt->execute();
         $result = $stmt->get_result();
 
+        $tomorrow = date('Y-m-d', strtotime('tomorrow'));
+        if ($date < $tomorrow) {
+            $errorMessage = "Invalid booking date. Booking must be at least from tomorrow.";
+        }
+
         if ($result->num_rows > 0) {
             $errorMessage = "Time slot is taken, please choose another";
         }
