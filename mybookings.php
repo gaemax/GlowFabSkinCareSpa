@@ -11,9 +11,9 @@
         SELECT 
             b.booking_id,
             b.date,
+            b.booking_type,
             b.start_time,
             b.end_time,
-            b.booking_type,
             s.name as status_name,
             sr.name as service,
             sbsr.name as subservice
@@ -62,8 +62,8 @@
                             <th>Service</th>
                             <th>Sub-Service</th>
                             <th>Date</th>
-                            <th>Type</th>
                             <th>Time Slot</th>
+                            <th>Type</th>
                             <th>Status</th>
                             <th></th>
                             <th></th>

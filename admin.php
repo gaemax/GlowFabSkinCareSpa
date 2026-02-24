@@ -238,12 +238,6 @@
 
 
 
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -262,7 +256,6 @@
             <li><a href="admin.php?page=appointments">Appointments</a></li>
             <li><a href="admin.php?page=clients">Clients</a></li>
             <li><a href="admin.php?page=calendar&year=2026">Calendar</a></li>
-            <!-- <li><a href="admin.php?page=messages">Messages</a></li> -->
             <li><a href="admin.php?page=servicemanager">Service Manager</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
@@ -407,12 +400,20 @@
                 </table>
             </div>
         </div>
-    <?php elseif ($page == "appointments"): ?>
+
+    
+            <?php elseif ($page == "appointments"): ?>
         <h1>Appointments</h1>
+
+        
+        <div style="margin-bottom:15px;">
+            <input type="text" id="searchInput" placeholder="Search appointments..."
+                style="padding:8px; width:250px; border-radius:6px; border:1px solid #ccc;">
+        </div>
 
         <div class="cardContainer">
             <div class="infoCard bookingTableCard">
-                <table>
+                <table id="appointmentsTable">
                     <thead>
                         <tr>
                             <th>Client Name</th>
@@ -436,7 +437,7 @@
                             <td>
                                 <form method="POST" action="changeStatus.php" class="editStatusForm">
                                     <input type="hidden" name="booking_id" value="<?=$a["booking_id"]?>">
-                                    <select name="status_id" id="">
+                                    <select name="status_id">
                                         <option value=""></option>
                                         <option value="1">Pending</option>
                                         <option value="2">Approved</option>
@@ -452,12 +453,34 @@
                 </table>    
             </div>
         </div>
+
+        
+        <script>
+        document.getElementById("searchInput").addEventListener("keyup", function() {
+            let filter = this.value.toLowerCase();
+            let rows = document.querySelectorAll("#appointmentsTable tbody tr");
+
+            rows.forEach(row => {
+                let text = row.textContent.toLowerCase();
+                row.style.display = text.includes(filter) ? "" : "none";
+            });
+        });
+        </script>
+
+    
     <?php elseif ($page == "clients"): ?>
-        <h1>Clients</h1>
+
+    <h1>Clients</h1>
+
+        
+        <div style="margin-bottom:15px;">
+            <input type="text" id="clientSearch" placeholder="Search clients..."
+                style="padding:8px; width:250px; border-radius:6px; border:1px solid #ccc;">
+        </div>
 
         <div class="cardContainer">
             <div class="infoCard bookingTableCard">
-                <table>
+                <table id="clientsTable">
                     <thead>
                         <tr>
                             <th>Last Name</th>
@@ -481,6 +504,20 @@
                 </table>
             </div>
         </div>
+
+       
+        <script>
+        document.getElementById("clientSearch").addEventListener("keyup", function() {
+            let filter = this.value.toLowerCase();
+            let rows = document.querySelectorAll("#clientsTable tbody tr");
+
+            rows.forEach(row => {
+                let text = row.textContent.toLowerCase();
+                row.style.display = text.includes(filter) ? "" : "none";
+            });
+        });
+    </script>
+
     <?php elseif ($page == "reports"): ?>
         <h1>Reports</h1>
     <?php elseif ($page == "calendar"): ?>
@@ -537,7 +574,7 @@
                             <thead>
                                 <tr>
                                     <th>Day</th>
-                                    <!-- <th>Timeslot</th> -->
+                                    <th>Time</th>
                                     <th>Client Name</th>
                                     <th>Service</th>
                                     <th>Subservice</th>
@@ -549,7 +586,13 @@
                                 <?php foreach ($monthlyFilter as $mf): ?>
                                     <tr>
                                         <td><?= htmlspecialchars(date("j", strtotime($mf["date"]))) ?></td>
-                                        <!-- <td><?= htmlspecialchars(date("g:i a", strtotime($mf["start_time"]))) . " to " . date("g:i a", strtotime($mf["end_time"]))?></td> -->
+
+                                        
+                                        <td>
+                                            <?= htmlspecialchars(date("g:i A", strtotime($mf["start_time"]))) ?>
+                                            <?= htmlspecialchars(date("g:i A", strtotime($mf["end_time"]))) ?>
+                                        </td>
+
                                         <td><?= htmlspecialchars($mf["user_name"]) ?></td>
                                         <td><?= htmlspecialchars($mf["service"]) ?></td>
                                         <td><?= htmlspecialchars($mf["subservice"]) ?></td>
@@ -563,7 +606,9 @@
                 <?php endforeach; ?>
             </div>
         </div>
-    <?php elseif ($page == "messages"): ?>
+
+
+     <?php elseif ($page == "messages"): ?>
         <h1>Messages</h1>
         <div class="messageListContainer">
             <div class="messageList">
@@ -585,7 +630,7 @@
                 <p><?= htmlspecialchars($messageResult["messageBody"])  ?></p>
             </div>
         </div>
-    <?php endif; ?>
+    <?php endif; ?> 
 
 </body>
 </html>
