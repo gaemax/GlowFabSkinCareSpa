@@ -1,8 +1,8 @@
 <?php
     session_start();
-    if(!isset($_SESSION["loggedin"])) {
-        header("location: login.php");
-    }
+    // if(!isset($_SESSION["loggedin"])) {
+    //     header("location: login.php");
+    // }
 ?>  
 
 <html>  
@@ -24,10 +24,10 @@
                     <li><a href="#services">Services</a></li>
                     <li><a href="#staff">Staff</a></li>
                     <li><a href="#reviews">Reviews</a></li>
-                    <li><a href="#contactUs">Contact Us</a></li>
-                    <li><a href="userprofile.php"><i class="fa-solid fa-user"></i></a></li>
+                    <!-- <li><a href="userprofile.php"><i class="fa-solid fa-user"></i></a></li> -->
                 </ul>
             </span>
+            <a href="login.php"><button class="primaryButton"> Log In</button></a>
         </div>
     </header>
 
@@ -35,8 +35,8 @@
         <div>
             <h2>Glow fab Skin Care Spa</h2>
             <h3>GLOW YOU DAY WITH GLOW FAB SKIN CARE SPA</h3>
-            <a href="booking.php"><button class="primaryButton">Book Now</button></a>
-            <a href="mybookings.php"><button class="secondaryButton">My Bookings</button></a>
+            <!-- <a href="booking.php"><button class="primaryButton">Book Now</button></a>
+            <a href="mybookings.php"><button class="secondaryButton">My Bookings</button></a> -->
         </div>
         <div>
             <img src="images/logo01.png" alt="">
@@ -261,46 +261,51 @@
         </div>
     </section>
 
-
-
-    <section id="contactUs" class="contactSection">
-        <h1 class="header-text">Contact Us</h1>
-        <div class="contactContainer">
-            <div class="contactInfo">
+    <footer>
+        <div class="footerBranding">
+            <div>
+                <img src="images/logo01.png" alt="">
+            </div>
+            <div>
+                <h1>Glow Fab</h1>
+                <h4>Skin Care Spa</h4>
+                <p>#137 SAN VICENTE STREET BARANGAY NUEVA SAN PEDRO LAGUNA</p>
+            </div>
+        </div>
+        <div class="footerInfo">
+            <div>
+                <h2>Navigate</h2>
                 <ul>
-                    <li class="contact-info">
-                        <i class="fa-solid fa-location-crosshairs"></i>
-                        <p>#137 SAN VICENTE STREET BARANGAY NUEVA SAN PEDRO LAGUNA</p>
-                    </li>
-                    <li class="contact-info">
+                    <li><a href="#hero">Back To Top</a></li>
+                    <li><a href="#aboutUs">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#staff">Staff</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
+                </ul>
+            </div>
+            <div>
+                <h2>Contact Us</h2>
+                <ul>
+                    <li>
                         <i class="fa-regular fa-envelope"></i>
                         <p>inna_jayne@yahhoo.com</p>
                     </li>
-                    <li class="contact-info">
+                    <li>
                         <i class="fa-solid fa-phone"></i>
                         <p>0995-382-6157 / 0928-604-3023</p>
                     </li>
-                    <li class="contact-info">
+                    <li>
                         <i class="fa-regular fa-clock"></i>
                         <p>MONDAY - SUNDAY: 11:00 AM - 9:00 PM</p>
                     </li>
-                    <li class="contact-info">
+                    <li>
                         <i class="fa-solid fa-globe"></i>
                         <p>glowfabskincarespa.com.ph</p>
                     </li>
                 </ul>
             </div>
-            <div class="contactForm">
-                <form action="" class="contactCard">
-                    <label>Send us a Message for Home Service</label>
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
-                    <textarea placeholder="Your Message" required></textarea>
-                    <input type="submit">
-                </form>
-            </div>
         </div>
-    </section>
+    </footer>
 
     </body>
 </html>
