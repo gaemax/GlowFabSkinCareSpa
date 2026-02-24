@@ -4,7 +4,7 @@
     $bookingId = (int)$_POST["booking_id"];
     $statusId = (int)$_POST["status_id"];
 
-    // die($bookingId . ' ' . $statusId);
+    //die($bookingId . ' ' . $statusId);
 
     $query = "
         UPDATE bookings 

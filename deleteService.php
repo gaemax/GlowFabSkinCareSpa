@@ -1,4 +1,5 @@
-<?php
+deleteService.php
+ <?php
     require "db.php";
 
     $service_id = $_GET["service_id"];
@@ -26,4 +27,4 @@
         exit();
     }
 
-?>
+?> 
