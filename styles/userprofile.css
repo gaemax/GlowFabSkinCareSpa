@@ -1,0 +1,97 @@
+@import url(global.css);
+
+body {
+    background-color: var(--light-pink-color);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.userInfoCard {
+    background-color: var(--white-color);
+
+    border-radius: 1rem;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40vw;
+
+    padding: 3rem 1rem;
+    margin: 3rem auto;
+}
+
+.profileIcon {
+    font-size: 10rem;
+}
+
+.userForm {
+    width: 100%;
+    /* border: 1px red solid; */
+}
+
+.userInfo {
+    display: grid;
+    grid-template-columns: 3fr 6fr 1fr;
+    row-gap: 2rem;
+
+    padding: 0 2rem;
+    margin: 0;
+    margin-top: 2rem;
+    
+    width: 100%;
+
+    /* border: 1px black solid; */
+}
+
+.userInfo * {
+    margin: 0;
+    padding: 0;
+}
+
+.userInfo p {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    padding: 0 1rem;
+}
+
+.userInfo a i {
+    font-size: 1.25rem;
+}
+
+
+.userInfo a {
+    text-align: center;
+}
+
+.editGroup {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.editInput[type="text"],
+.editInput[type="number"],
+.editInput[type="email"],
+.editInput[type="password"] {
+    width: 100%;
+
+    padding: 0.5rem 0.75rem;
+
+    border: 1px solid #dcdcdc;
+    border-radius: 0.75rem;
+
+    font-size: 0.75rem;
+    font-family: inherit;
+}
+
+.editInput[type="submit"] {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.25rem;
+}

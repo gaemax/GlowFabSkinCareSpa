@@ -26,7 +26,7 @@
                     <li><a href="#staff">Staff</a></li>
                     <li><a href="#reviews">Reviews</a></li>
                     <li><a href="#contactUs">Contact Us</a></li>
-                    <li><a href="logout.php">Logout</a></li>
+                    <li><a href="userprofile.php"><i class="fa-solid fa-user"></i></a></li>
                 </ul>
             </span>
         </div>
