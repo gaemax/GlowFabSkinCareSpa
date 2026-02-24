@@ -13,6 +13,7 @@
             b.date,
             b.start_time,
             b.end_time,
+            b.booking_type,
             s.name as status_name,
             sr.name as service,
             sbsr.name as subservice
@@ -61,6 +62,7 @@
                             <th>Service</th>
                             <th>Sub-Service</th>
                             <th>Date</th>
+                            <th>Type</th>
                             <th>Time Slot</th>
                             <th>Status</th>
                             <th></th>
@@ -75,6 +77,7 @@
                             <td><?= htmlspecialchars($b["subservice"]) ?></td>
                             <td><?= htmlspecialchars(date("F j, Y", strtotime($b["date"]))) ?></td>
                             <td><?= htmlspecialchars(date("g:i a", strtotime($b["start_time"]))) . " to " . date("g:i a", strtotime($b["end_time"]))?></td>
+                            <td><?= htmlspecialchars($b["booking_type"]) ?></td>
                             <td><?= htmlspecialchars($b["status_name"]) ?></td>
                             <td>
                                 <?php if ($b["status_name"] === "Pending"): ?>

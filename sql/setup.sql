@@ -77,6 +77,7 @@ CREATE TABLE bookings (
     user_id INT UNSIGNED NOT NULL,
     service_id INT UNSIGNED NOT NULL,
     subservice_id INT UNSIGNED NOT NULL,
+    booking_type ENUM('In-Clinic', 'At-Home') NOT NULL,
     date DATE NOT NULL,
     start_time TIME NOT NULL,
     end_time TIME NOT NULL,

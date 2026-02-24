@@ -46,6 +46,7 @@
         $subservice = trim($_POST["subservice"]);
         $time = trim($_POST["time"]);
         $date = trim($_POST["date"]);
+        $bookingType = trim($_POST["bookingType"]);
         $defaultStatus = 1;
 
         $time1 = explode(" - ", $time)[0];
@@ -61,15 +62,19 @@
             AND service_id = ?
             AND subservice_id = ?
             AND start_time = ?
-            AND end_time = ?";
+            AND end_time = ?
+            AND booking_type = ?
+            AND status_id = 1 OR status_id = 2
+        ";
         $stmt = $conn->prepare($query);
         $stmt->bind_param(
-            "siiss",
+            "siisss",
             $date,
             $service,
             $subservice,
             $timeStart,
-            $timeEnd
+            $timeEnd,
+            $bookingType
         );
         $stmt->execute();
         $result = $stmt->get_result();
@@ -86,14 +91,15 @@
         if ($errorMessage === "") {
             $query = "
                 INSERT INTO bookings 
-                (user_id, service_id, subservice_id, date, start_time, end_time, status_id)
-                VALUES (?, ?, ?, ?, ?, ?, ?)";
+                (user_id, service_id, subservice_id, booking_type, date, start_time, end_time, status_id)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($query);
             $stmt->bind_param(
-                "isssssi",
+                "issssssi",
                 $_SESSION["user_id"],
                 $service,
                 $subservice,
+                $bookingType,
                 $date,
                 $timeStart,
                 $timeEnd,
@@ -148,20 +154,27 @@
                         </select>
                     </div>
 
-                    <input type="date" name="date" required>
-
-                    <select name="time" id="time">
-                        <option>11am - 12pm</option>
-                        <option>12pm - 1pm</option>
-                        <option>1pm - 2pm</option>
-                        <option>2pm - 3pm</option>
-                        <option>3pm - 4pm</option>
-                        <option>4pm - 5pm</option>
-                        <option>5pm - 6pm</option>
-                        <option>6pm - 7pm</option>
-                        <option>7pm - 8pm</option>
-                        <option>8pm - 9pm</option>
-                    </select>
+                    <div class="hContainer">
+                        <input type="date" name="date" required>
+                        <select name="time" id="time">
+                            <option value="">Choose a timeslot</option>
+                            <option>11am - 12pm</option>
+                            <option>12pm - 1pm</option>
+                            <option>1pm - 2pm</option>
+                            <option>2pm - 3pm</option>
+                            <option>3pm - 4pm</option>
+                            <option>4pm - 5pm</option>
+                            <option>5pm - 6pm</option>
+                            <option>6pm - 7pm</option>
+                            <option>7pm - 8pm</option>
+                            <option>8pm - 9pm</option>
+                        </select>
+                        <select name="bookingType" id="bookingType" required>
+                            <option value="">Choose the booking type</option>
+                            <option value="In-Clinic">In-Clinic</option>
+                            <option value="At-Home">At-Home</option>
+                        </select>
+                    </div>
 
                     <input type="submit" value="Confirm Booking">
                     <p class="errorMessage"><?= htmlspecialchars($errorMessage) ?></p>
