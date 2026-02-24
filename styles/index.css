@@ -2,14 +2,15 @@
 
 .primaryButton {
     background-color: var(--secondary-color);
-    color: var(--dark-color);
-    padding: 1rem 2rem;
+    color: var(--white-color);
+    padding: 0.5rem 2rem;
     cursor: pointer;
 
     border: 0;
     border-radius: 2rem;
 
     font-size: 1rem;
+    font-weight: 600;
 
     transition: all 300ms;
 }
@@ -20,7 +21,7 @@
 .secondaryButton {
     background-color: var(--dark-color);
     color: var(--light-pink-color);
-    padding: 1rem 2rem;
+    padding: 0.5rem 2rem;
     cursor: pointer;
 
     border: 0;
@@ -291,113 +292,47 @@
 
 
 
-
-
-.contactSection {
-    background-color: var(--light-pink-color);
-    min-height: 80vh;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    padding: 3rem 7vw;
-    color: var(--dark-color);
-}
-
-.contactSection .contactContainer {
-    display: flex;
-    width: 100%;
-    gap: 1rem;
-
-    /* border: 1px red solid; */
-}
-
-.contactSection .contactContainer .contactInfo,
-.contactSection .contactContainer .contactForm {
-    flex: 1 1 auto;
-    /* border: 1px blue solid; */
-}
-
-.contactSection .contactContainer .contactInfo ul {
+footer * {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
     list-style: none;
-    padding: 0;
-    margin: 0;
-
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.contactSection .contactContainer .contactInfo ul li {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-
-    font-size: 1rem;
-}
-
-.contactSection .contactContainer .contactInfo ul li * {
-    font-size: 1rem;
-    padding: 0;
-    margin: 0;
-    color: var(--primary-color);
-}
-
-.contactSection .contactContainer .contactForm {
-    display: flex;
-    justify-content: center;
-}
-
-.contactSection .contactContainer .contactForm .contactCard {
-    background-color: var(--white-color);
-
-    max-width: 80%;
-    padding: 2rem 2rem;
-    border-radius: 1rem;
-    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
-
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.contactSection .contactContainer .contactForm .contactCard label {
-    font-size: 1.25rem;
-    font-weight: 700;
-}
-
-.contactSection .contactContainer .contactForm .contactCard input[type="text"],
-.contactSection .contactContainer .contactForm .contactCard input[type="email"],
-.contactSection .contactContainer .contactForm .contactCard textarea {
-    padding: 0.75rem 1rem;
-
-    border: 1px solid #dcdcdc;
-    border-radius: 0.75rem;
-
-    font-size: 0.75rem;
-    font-family: inherit;
-}
-
-.contactSection .contactContainer .contactForm .contactCard textarea {
-    resize: vertical;
-    height: 20rem;
-}
-
-.contactSection .contactContainer .contactForm .contactCard input[type="submit"] {
-    background-color: var(--secondary-color);
-    cursor: pointer;
-
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 1rem;
-
-    font-size: 1rem;
-    font-family: inherit;
+    color: inherit;
 
     transition: all 300ms;
 }
 
-.contactSection .contactContainer .contactForm .contactCard input[type="submit"]:hover {
-    scale: 1.02;
+footer img {
+    height: 10rem;
+}
+
+footer li {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+footer li:hover {
+    transform: translateX(5px);
+}
+
+footer  {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+
+    display: flex;
+    justify-content: space-between;
+
+    min-height: 20vh;
+    padding: 2rem 7vw;
+}
+
+footer .footerBranding {
+    display: flex;
+    align-items: center;
+}
+
+footer .footerInfo {
+    display: flex;
+    gap: 5rem;
 }

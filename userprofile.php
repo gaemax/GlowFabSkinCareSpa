@@ -57,7 +57,9 @@
             <div class="navigatorBar">
                 <h1>Glow Fab</h1>
                 <ul>
-                    <li><a href="index.php">Back</a></li>
+                    <li><a href="booking.php">Book an Appointment</a></li>
+                    <li><a href="mybookings.php">My Bookings</a></li>
+                    <li><a href="userprofile.php">Profile</a></li>
                 </ul>
             </div>
         </header>

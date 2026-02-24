@@ -32,10 +32,10 @@
 
     if(isset($_SESSION["loggedin"])) {
         if ($_SESSION["role"] === "client") {
-            header("Location: index.php");
+            header("Location: mybookings.php");
             exit();
         } else if ($_SESSION["role"] === "staff" || $_SESSION["role"] === "admin") {
-            header("Location: admin.php");
+            header("Location: index.php");
             exit();
         }
     }
@@ -55,6 +55,10 @@
         <header>
             <div class="navigatorBar">
                 <h1>Glow Fab</h1>
+                <ul>
+                    <li><a href="index.php">Back</a></li>
+                </ul>
+            </span>
             </div>
         </header>
 
