@@ -117,7 +117,7 @@
     if ($statusId) {
         $where[] = "b.status_id = ?";
         $params[] = $statusId;
-        $types .= "i"; // integer
+        $types .= "i"; 
     }
 
     if ($serviceId) {
@@ -129,7 +129,7 @@
     if ($date) {
         $where[] = "b.date = ?";
         $params[] = $date;
-        $types .= "s"; // string
+        $types .= "s"; 
     }
 
     $whereSQL = "";
@@ -235,8 +235,6 @@
     }
 
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
