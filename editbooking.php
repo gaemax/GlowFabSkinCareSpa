@@ -61,9 +61,6 @@
         $timeStart = date("H:i:s", strtotime($time1));
         $timeEnd = date("H:i:s", strtotime($time2));
 
-        // $alertMsg = "Service: $service\nSubservice: $subservice\nDate: $date\nStart Time: $timeStart\nEnd Time: $timeEnd";
-        // die($alertMsg);
-
         $query = "
             SELECT booking_id
             FROM bookings
@@ -85,7 +82,7 @@
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            $errorMessage = "Time slot is taken, please choose another";
+            $errorMessage = "Time slot is taken, please choose another";    
         }
 
         $tomorrow = date('Y-m-d', strtotime('tomorrow'));
@@ -141,7 +138,7 @@
         <div class="navigatorBar">
             <h1>Glow Fab</h1>
             <ul>
-                <li><a href="index.php">Back</a></li>
+                <li><a href="mybookings.php">Back</a></li>
             </ul>
         </div>
     </header>
@@ -177,7 +174,7 @@
                         <option>5pm - 6pm</option>
                         <option>6pm - 7pm</option>
                         <option>7pm - 8pm</option>
-                        <option>8pm - 9pm</option>
+                        <option>8pm - 9pm</option>  
                     </select>
 
                     <input type="submit" value="Confirm Booking">
