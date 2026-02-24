@@ -62,6 +62,7 @@
                             <th>Time Slot</th>
                             <th>Status</th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -77,6 +78,13 @@
                                 <?php if ($b["status_name"] === "Pending"): ?>
                                     <a href="editbooking.php?booking_id=<?= $b["booking_id"] ?>">
                                         <button class="reschedButton">Reschedule</button>
+                                    </a>
+                                <?php endif; ?>
+                            </td>
+                            <td>
+                                <?php if ($b["status_name"] === "Pending"): ?>
+                                    <a href="cancelBooking.php?booking_id=<?= $b["booking_id"] ?>">
+                                        <button class="reschedButton">Cancel Booking</button>
                                     </a>
                                 <?php endif; ?>
                             </td>

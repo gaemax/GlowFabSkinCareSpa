@@ -157,7 +157,7 @@
             </form>
                             
             <span>
-                <a href="mybookings.php"><button class="secondaryButton">View my Bookings</button></a>
+                <a href="mybookings.php"><button class="secondaryButton">View my Booking History</button></a>
                 <a href="logout.php"><button class="primaryButton">Logout</button></a>
             </span>
         </div>
