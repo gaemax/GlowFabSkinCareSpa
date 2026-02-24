@@ -45,19 +45,23 @@
 
 
 
-
 .heroSection {
     background-color: var(--light-pink-color);
     min-height: 80vh;
     
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
     padding: 0 7vw;
 }
 
 .heroSection div {
-    width: 50%;
+    flex: 1 1 50%;
+}
+
+.heroSection div img {
+    width: 100%;
+    text-align: center;
 }
 
 .heroSection h2 {
@@ -85,14 +89,14 @@
     min-height: 80vh;
     
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
     padding: 0 7vw;
 }
 
 .aboutUsSection div {
-    width: 50%;
+    width: 100%;
 }
 
 

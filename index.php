@@ -37,6 +37,8 @@
             <h3>GLOW YOU DAY WITH GLOW FAB SKIN CARE SPA</h3>
             <a href="booking.php"><button class="primaryButton">Book Now</button></a>
             <a href="mybookings.php"><button class="secondaryButton">My Bookings</button></a>
+        </div>
+        <div>
             <img src="images/logo01.png" alt="">
         </div>
     </section>
@@ -45,6 +47,8 @@
         <div>
             <h1>About Us!</h1>
             <p>Glow Fab Skin Care Spa is your go-to place for relaxation, beauty, and confidence. We offer quality skin care and beauty treatments designed to enhance your natural glow, using safe products and professional techniques. At Glow Fab, we believe that everyone deserves to feel beautiful, refreshed, and confident.</p>
+        </div>
+        <div>
             <img src="images/logo02.png" alt="">
         </div>
     </section>
