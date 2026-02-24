@@ -83,16 +83,22 @@
 
 
     // Fetch services
-    $query = "SELECT * FROM services";
+    $query = "
+        SELECT *
+        FROM services
+        WHERE deleted_at IS NULL
+    ";
     $stmt = $conn->query($query);
     $result = $stmt->fetch_all(MYSQLI_ASSOC);
     $serviceList = $result;
 
     // Fetch subservices
     $query = "
-    SELECT sb.*, s.name AS service_name
-    FROM subservices sb
-    JOIN services s ON sb.service_id = s.service_id";
+        SELECT sb.*, s.name AS service_name
+        FROM subservices sb
+        JOIN services s ON sb.service_id = s.service_id
+        WHERE sb.deleted_at IS NULL
+    ";
     $result = $conn->query($query);
     $subserviceList = $result->fetch_all(MYSQLI_ASSOC);
     $groupedSubservices = [];
@@ -230,6 +236,14 @@
 
 ?>
 
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -248,8 +262,8 @@
             <li><a href="admin.php?page=appointments">Appointments</a></li>
             <li><a href="admin.php?page=clients">Clients</a></li>
             <li><a href="admin.php?page=calendar&year=2026">Calendar</a></li>
-            <li><a href="admin.php?page=messages">Messages</a></li>
-             <li><a href="admin.php?page=servicemanager">Service Manager</a></li>
+            <!-- <li><a href="admin.php?page=messages">Messages</a></li> -->
+            <li><a href="admin.php?page=servicemanager">Service Manager</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
     </div>
@@ -326,8 +340,8 @@
                 <h1>Services</h1>
                 <div class="bookingCard">
                     <form method="POST" action="addService.php">
-                        <input type="text" name="name" placeholder="Name">
-                        <input type="text" name="desc" placeholder="Description">
+                        <input type="text" name="name" placeholder="Name" required>
+                        <input type="text" name="desc" placeholder="Description" required>
                         <input type="submit" value="Add/Edit Service">
                     </form>
                 </div>
@@ -357,15 +371,15 @@
                 <h1>Sub-Services</h1>
                 <div class="bookingCard">
                     <form method="POST" action="addSubService.php">
-                        <input type="text" name="name" placeholder="Name">
-                        <select name="parentService">
+                        <input type="text" name="name" placeholder="Name" required>
+                        <select name="parentService" required>
                             <option value="">Choose parent service</option>
                             <?php foreach($serviceList as $s): ?>
                                 <option value="<?= htmlspecialchars($s["name"]) ?>"><?= htmlspecialchars($s["name"]) ?></option>
                             <?php endforeach; ?>
                         </select>
-                        <input type="text" name="desc" placeholder="Description">
-                        <input type="number" name="price" placeholder="Price">
+                        <input type="text" name="desc" placeholder="Description" required>
+                        <input type="number" name="price" placeholder="Price" required>
                         <input type="submit" value="Add/Edit Service">
                     </form>
                 </div>

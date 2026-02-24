@@ -40,6 +40,7 @@ CREATE TABLE messages (
     user_id INT UNSIGNED NOT NULL,
     messageBody TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP NULL DEFAULT NULL,
     CONSTRAINT fk_messages_user 
         FOREIGN KEY (user_id) 
         REFERENCES users(user_id) 
@@ -49,9 +50,10 @@ CREATE TABLE messages (
 
 CREATE TABLE services (
     service_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL UNIQUE,
+    name VARCHAR(100) NOT NULL,
     description TEXT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP NULL DEFAULT NULL
 ) ENGINE=InnoDB;
 
 CREATE TABLE subservices (
@@ -61,6 +63,7 @@ CREATE TABLE subservices (
     description TEXT NULL,
     price DECIMAL(10,2) NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP NULL DEFAULT NULL,
     CONSTRAINT fk_subservices_service
         FOREIGN KEY (service_id)
         REFERENCES services(service_id)
@@ -79,6 +82,7 @@ CREATE TABLE bookings (
     end_time TIME NOT NULL,
     status_id INT UNSIGNED NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP NULL DEFAULT NULL,
 
     CONSTRAINT fk_bookings_user 
         FOREIGN KEY (user_id) 
