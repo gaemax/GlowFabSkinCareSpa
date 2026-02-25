@@ -107,7 +107,9 @@
             );
             $stmt->execute();
 
-            header("Location: mybookings.php");
+            $message = "Sucecssfully booked an appointment";
+            echo "<script>alert('$message');</script>";
+            //header("Location: mybookings.php");
         } else {
 
         }
