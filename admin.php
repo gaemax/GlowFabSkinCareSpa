@@ -294,7 +294,7 @@
 
         <div class="cardContainer">
             <div class="infoCard bookingTableCard">
-                <h1>Appointments Today</h1>
+                <!-- <h1>Record Appointments</h1> -->
                 <div class="bookingCard">
                 </div>
                 <table>
